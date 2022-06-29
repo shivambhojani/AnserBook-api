@@ -1,4 +1,4 @@
 import { homeService } from "./home.service.js";
-import { postService } from "./post.service.js";
+import { postsService } from "./posts.service.js";
 
-export { homeService, postService };
+export { homeService, postsService };

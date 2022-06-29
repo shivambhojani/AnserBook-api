@@ -1,4 +1,4 @@
 import { homeController } from "./home.controller.js";
-import { postController } from "./post.controller.js";
+import { postsController } from "./posts.controller.js";
 
-export { homeController, postController };
+export { homeController, postsController };

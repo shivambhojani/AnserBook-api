@@ -14,7 +14,7 @@ const getAPost = id => {
   return posts.filter(post => post.id == id);
 };
 
-export const postService = {
+export const postsService = {
   getAllPosts,
   getAPost,
 };

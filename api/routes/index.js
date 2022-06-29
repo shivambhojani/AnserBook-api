@@ -1,4 +1,4 @@
 import homeRoute from "./home.route.js";
-import postRoute from "./post.route.js";
+import postsRoute from "./posts.route.js";
 
-export { homeRoute, postRoute };
+export { homeRoute, postsRoute };

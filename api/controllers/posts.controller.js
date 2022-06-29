@@ -1,8 +1,8 @@
-import { postService } from "../services/index.js";
+import { postsService } from "../services/index.js";
 
 // Get all posts
 const postsGET = (req, res) => {
-  const posts = postService.getAllPosts();
+  const posts = postsService.getAllPosts();
 
   res.status(200).json({
     message: "ok",
@@ -11,10 +11,10 @@ const postsGET = (req, res) => {
 };
 
 // Get a post based on the id
-const postGET = (req, res) => {
+const postsByIDGET = (req, res) => {
   const { id } = req.params;
 
-  const post = postService.getAPost(id);
+  const post = postsService.getAPost(id);
 
   res.status(200).json({
     message: "ok",
@@ -22,7 +22,7 @@ const postGET = (req, res) => {
   });
 };
 
-export const postController = {
+export const postsController = {
   postsGET,
-  postGET,
+  postsByIDGET,
 };
