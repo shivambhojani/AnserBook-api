@@ -1,0 +1,56 @@
+{
+  "name": "AnswerBook-backend",
+  "version": "1.0.0",
+  "description": "Backend for AnswerBook",
+  "type": "module",
+  "contributors": [
+    {
+      "name": "Aman Singh Bhandari",
+      "email": "am727005@dal.ca"
+    },
+    {
+      "name": "Kuldeep Bhimani",
+      "email": "kl681090@dal.ca"
+    },
+    {
+      "name": "Naga Pavan Srivathsav Chevuru",
+      "email": "ng490417@dal.ca"
+    },
+    {
+      "name": "Saurabh Jayeshbhai Das",
+      "email": "sr850847@dal.ca"
+    },
+    {
+      "name": "Shivam Bhojani",
+      "email": "sh827646@dal.ca"
+    },
+    {
+      "name": "Shivangi Bhatt",
+      "email": "sh224186@dal.ca"
+    }
+  ],
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "serve": "nodemon api/app.js",
+    "start": "node api/app.s"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://git.cs.dal.ca/sjdas/csci5709-group6-project-backend.git"
+  },
+  "keywords": [
+    "Node",
+    "Express",
+    "CSCI5709",
+    "Project",
+    "Group6"
+  ],
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.18"
+  }
+}
