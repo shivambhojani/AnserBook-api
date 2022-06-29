@@ -33,7 +33,7 @@
   "main": "index.js",
   "scripts": {
     "serve": "nodemon api/app.js",
-    "start": "node api/app.s"
+    "start": "node api/app.js"
   },
   "repository": {
     "type": "git",
