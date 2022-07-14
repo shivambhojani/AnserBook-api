@@ -10,6 +10,12 @@ const getAppreciation = async (userid) => {
   return appreciation;
 };
 
+const incrementLikesScore = async (userid) => {
+  const appreciation = await Appreciation.findOne({ userId: userid });
+  appreciation.likesScore = appreciation.likesScore + 1;
+  await Appreciation.updateOne(appreciation);
+};
+
 export const appreciationService = {
   updateAppreciation,
   getAppreciation,

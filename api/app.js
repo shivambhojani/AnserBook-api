@@ -2,13 +2,13 @@ import express from "express";
 import { PORT, CONNECTION_URL } from "./constants/index.js";
 import { mongoose } from "mongoose";
 
-
 import {
   homeRoute,
   postsRoute,
   feedsRoute,
   appreciationRoute,
-  authRoute
+  offer_appreciationRoute,
+  authRoute,
 } from "./routes/index.js";
 import cors from "cors";
 
@@ -27,6 +27,7 @@ app.use("/auth", authRoute);
 app.use("/feed", postsRoute);
 app.use("/feeds", feedsRoute);
 app.use("/appreciation", appreciationRoute);
+app.use("/offerscore", offer_appreciationRoute);
 
 mongoose
   .connect(CONNECTION_URL, {

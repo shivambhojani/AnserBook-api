@@ -4,5 +4,11 @@ import authRoute from "./auth.route.js";
 
 import feedsRoute from "./feeds.route.js";
 import appreciationRoute from "./appreciation.route.js";
-
-export { homeRoute, postsRoute, feedsRoute, appreciationRoute,authRoute };
+import offer_appreciationRoute from "./offer_appreciation.route.js";
+export {
+  homeRoute,
+  postsRoute,
+  feedsRoute,
+  appreciationRoute,
+  offer_appreciationRoute,
+};
