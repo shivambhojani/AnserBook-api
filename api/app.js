@@ -33,7 +33,3 @@ mongoose
   .catch((error) => {
     console.log("Error-=-=-", error.message);
   });
-
-app.listen(PORT, () => {
-  console.log(`Example app listening on port ${PORT}`);
-});
