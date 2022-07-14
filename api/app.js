@@ -1,16 +1,23 @@
 import express from "express";
 import mongoose from "mongoose";
 import { PORT, CONNECTION_URL } from "./constants/index.js";
-import { homeRoute, postsRoute, appreciationRoute } from "./routes/index.js";
+import {
+  homeRoute,
+  postsRoute,
+  feedsRoute,
+  appreciationRoute,
+} from "./routes/index.js";
+import cors from "cors";
 
 const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cors());
 
-app.use("/", homeRoute);
+// app.use("/", homeRoute);
 app.use("/posts", postsRoute);
-app.use("/feed", postsRoute);
+app.use("/feeds", feedsRoute);
 app.use("/appreciation", appreciationRoute);
 
 mongoose
@@ -19,14 +26,10 @@ mongoose
     useUnifiedTopology: true,
   })
   .then(() => {
-    app.listen(process.env.PORT, () =>
+    app.listen(PORT, () =>
       console.log("⚡[server]: Server is running on port:", PORT)
     );
   })
   .catch((error) => {
     console.log("Error-=-=-", error.message);
   });
-
-app.listen(PORT, () => {
-  console.log(`Example app listening on port ${PORT}`);
-});

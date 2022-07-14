@@ -8,6 +8,10 @@ import { feedsController } from "../controllers/index.js";
 
 const feedsRoute = Router();
 
-feedsRoute.get("/", feedsController.getFeeds);
+feedsRoute.get("/all", feedsController.getFeeds);
+feedsRoute.get("/getAllSocialPosts", feedsController.getAllSocialPosts);
+feedsRoute.get("/getAllTechnicalPosts", feedsController.getAllTechnicalPosts);
+feedsRoute.get("/getAllSubscribedPosts", feedsController.getAllSubscribedPosts);
+feedsRoute.get("/getHotTopics", feedsController.getHotTopics);
 
 export default feedsRoute;
