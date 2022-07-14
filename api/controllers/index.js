@@ -4,10 +4,12 @@ import { authController } from "./auth.controller.js";
 
 import { feedsController } from "./feeds.controller.js";
 import { appreciationController } from "./appreciation.controller.js";
+import { offer_appreciationController } from "./offer_appreciation.controller.js";
 
 export {
   homeController,
   postsController,
   feedsController,
-  appreciationController,authController
+  appreciationController,
+  offer_appreciationController,
 };
