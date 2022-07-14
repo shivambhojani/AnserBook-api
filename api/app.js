@@ -12,9 +12,6 @@ import {
 } from "./routes/index.js";
 import cors from "cors";
 
-mongoose.connect(
-  "mongodb+srv://group6:group6@prodcluster.3nmkwml.mongodb.net/test"
-);
 const app = express();
 
 app.use(express.json());

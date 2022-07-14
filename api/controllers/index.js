@@ -12,4 +12,5 @@ export {
   feedsController,
   appreciationController,
   offer_appreciationController,
+  authController,
 };

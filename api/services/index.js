@@ -12,4 +12,5 @@ export {
   feedService,
   appreciationService,
   offer_appreciationService,
+  authService,
 };
