@@ -1,7 +1,7 @@
 import express from "express";
 import mongoose from "mongoose";
 import { PORT, CONNECTION_URL } from "./constants/index.js";
-import { homeRoute, postsRoute } from "./routes/index.js";
+import { homeRoute, postsRoute, appreciationRoute } from "./routes/index.js";
 
 const app = express();
 
@@ -11,6 +11,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/", homeRoute);
 app.use("/posts", postsRoute);
 app.use("/feed", postsRoute);
+app.use("/appreciation", appreciationRoute);
 
 mongoose
   .connect(CONNECTION_URL, {
@@ -25,3 +26,7 @@ mongoose
   .catch((error) => {
     console.log("Error-=-=-", error.message);
   });
+
+app.listen(PORT, () => {
+  console.log(`Example app listening on port ${PORT}`);
+});
