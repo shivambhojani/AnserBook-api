@@ -3,77 +3,44 @@ import { feedService } from "../services/index.js";
 // Get all feeds
 const getFeeds = async (req, res) => {
   try {
-    const posts = await feedService.getAllPosts();
-    console.log("posts", posts);
+    const { filter } = req.params;
 
-    res.status(200).json({
-      status: true,
-      message: posts,
-    });
-  } catch (err) {
-    res.status(500).json({
-      message: "Internal Server Error",
-      status: false,
-    });
-  }
-};
-const getAllSocialPosts = async (req, res) => {
-  try {
-    const posts = await feedService.getAllSocialPosts();
-    console.log(posts);
+    if (filter.toLowerCase() == "social") {
+      const posts = await feedService.getAllSocialPosts();
+      res.status(200).json({
+        status: true,
+        message: posts,
+      });
+    } else if (filter.toLowerCase() == "technical") {
+      const posts = await feedService.getAllTechnicalPosts();
 
-    res.status(200).json({
-      status: true,
-      message: posts,
-    });
-  } catch (err) {
-    res.status(500).json({
-      message: "Internal Server Error",
-      status: false,
-    });
-  }
-};
-const getAllTechnicalPosts = async (req, res) => {
-  try {
-    const posts = await feedService.getAllTechnicalPosts();
-    console.log(posts);
+      res.status(200).json({
+        status: true,
+        message: posts,
+      });
+    } else if (filter.toLowerCase() == "subscribed") {
+      const posts = await feedService.getAllSubscribedPosts();
 
-    res.status(200).json({
-      status: true,
-      message: posts,
-    });
-  } catch (err) {
-    res.status(500).json({
-      message: "Internal Server Error",
-      status: false,
-    });
-  }
-};
-const getAllSubscribedPosts = async (req, res) => {
-  try {
-    const posts = await feedService.getAllSubscribedPosts();
-    console.log(posts);
+      res.status(200).json({
+        status: true,
+        message: posts,
+      });
+    } else if (filter.toLowerCase() == "hottopics") {
+      const posts = await feedService.getHotTopics();
 
-    res.status(200).json({
-      status: true,
-      message: posts,
-    });
-  } catch (err) {
-    res.status(500).json({
-      message: "Internal Server Error",
-      status: false,
-    });
-  }
-};
-const getHotTopics = async (req, res) => {
-  try {
-    const posts = await feedService.getHotTopics();
-    console.log(posts);
+      res.status(200).json({
+        status: true,
+        message: posts,
+      });
+    } else {
+      const posts = await feedService.getAllPosts();
+      console.log("posts", posts);
 
-    res.status(200).json({
-      status: true,
-      message: posts,
-    });
+      res.status(200).json({
+        status: true,
+        message: posts,
+      });
+    }
   } catch (err) {
     res.status(500).json({
       message: "Internal Server Error",
@@ -84,8 +51,4 @@ const getHotTopics = async (req, res) => {
 
 export const feedsController = {
   getFeeds,
-  getAllSocialPosts,
-  getAllTechnicalPosts,
-  getAllSubscribedPosts,
-  getHotTopics,
 };

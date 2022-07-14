@@ -12,6 +12,7 @@ const getAllPosts = async () => {
       },
     },
     { $unwind: "$user" },
+    { $sort: { createdOn: -1 } },
   ]);
   return posts;
 };
@@ -27,6 +28,7 @@ const getAllSocialPosts = async () => {
     },
     { $unwind: "$user" },
     { $match: { type: { $regex: new RegExp("Social", "i") } } },
+    { $sort: { createdOn: -1 } },
   ]);
 
   return posts;
@@ -43,6 +45,7 @@ const getAllTechnicalPosts = async () => {
     },
     { $unwind: "$user" },
     { $match: { type: { $regex: new RegExp("Technical", "i") } } },
+    { $sort: { createdOn: -1 } },
   ]);
 
   return posts;
@@ -58,6 +61,7 @@ const getAllSubscribedPosts = async () => {
       },
     },
     { $unwind: "$user" },
+    { $sort: { createdOn: -1 } },
   ]);
   return posts;
 };
@@ -72,6 +76,7 @@ const getHotTopics = async () => {
       },
     },
     { $unwind: "$user" },
+    { $sort: { createdOn: -1 } },
   ]);
   return posts;
 };
