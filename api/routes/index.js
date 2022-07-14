@@ -11,4 +11,5 @@ export {
   feedsRoute,
   appreciationRoute,
   offer_appreciationRoute,
+  authRoute,
 };
