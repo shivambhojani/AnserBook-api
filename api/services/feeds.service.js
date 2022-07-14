@@ -1,39 +1,85 @@
-import mongoose from "mongoose";
 import Post from "../models/post.js";
 
 // Service to get all posts
 const getAllPosts = async () => {
-  const posts = await Post.find();
+  const posts = await Post.aggregate([
+    {
+      $lookup: {
+        from: "users",
+        localField: "userId",
+        foreignField: "_id",
+        as: "user",
+      },
+    },
+    { $unwind: "$user" },
+  ]);
+  return posts;
+};
+const getAllSocialPosts = async () => {
+  const posts = await Post.aggregate([
+    {
+      $lookup: {
+        from: "users",
+        localField: "userId",
+        foreignField: "_id",
+        as: "user",
+      },
+    },
+    { $unwind: "$user" },
+    { $match: { type: { $regex: new RegExp("Social", "i") } } },
+  ]);
 
   return posts;
 };
+const getAllTechnicalPosts = async () => {
+  const posts = await Post.aggregate([
+    {
+      $lookup: {
+        from: "users",
+        localField: "userId",
+        foreignField: "_id",
+        as: "user",
+      },
+    },
+    { $unwind: "$user" },
+    { $match: { type: { $regex: new RegExp("Technical", "i") } } },
+  ]);
 
-// Service to get a post by id
-const getAPost = async (id) => {
-  console.log(id);
-
-  const post = await Post.findOne({ userId: id });
-
-  console.log(post);
-
-  return post.filter((post) => post.userId == id);
+  return posts;
+};
+const getAllSubscribedPosts = async () => {
+  const posts = await Post.aggregate([
+    {
+      $lookup: {
+        from: "users",
+        localField: "userId",
+        foreignField: "_id",
+        as: "user",
+      },
+    },
+    { $unwind: "$user" },
+  ]);
+  return posts;
+};
+const getHotTopics = async () => {
+  const posts = await Post.aggregate([
+    {
+      $lookup: {
+        from: "users",
+        localField: "userId",
+        foreignField: "_id",
+        as: "user",
+      },
+    },
+    { $unwind: "$user" },
+  ]);
+  return posts;
 };
 
-// Service to save the post
-const insertAPost = async (post) => {
-  mongoose.connect(mongoURL);
-
-  const newPost = await Post.create(post);
-
-  await newPost.save();
-
-  console.log(newPost);
-
-  mongoose.connection.close();
-};
-
-export const postsService = {
+export const feedService = {
   getAllPosts,
-  getAPost,
-  insertAPost,
+  getAllSocialPosts,
+  getAllTechnicalPosts,
+  getAllSubscribedPosts,
+  getHotTopics,
 };
