@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-
 import Post from "../models/post.js";
 
 // Service to get all posts
@@ -22,11 +21,15 @@ const getAPost = async (id) => {
 
 // Service to save the post
 const insertAPost = async (post) => {
+  mongoose.connect(mongoURL);
+
   const newPost = await Post.create(post);
 
   await newPost.save();
 
   console.log(newPost);
+
+  mongoose.connection.close();
 };
 
 export const postsService = {
