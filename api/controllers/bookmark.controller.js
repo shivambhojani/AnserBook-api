@@ -4,11 +4,14 @@
  */
 import { bookmarkService } from "../services/index.js";
 
-const getBookmarksOfUser = async (req, res) => {
+const getBookmarkListOfUser = async (req, res) => {
   try {
-    const resFromService = await bookmarkService.getBookmarksOfUser();
+    const { userId } = req.params;
+    const resFromService = await bookmarkService.getBookmarkListOfUser(userId);
+
     res.status(200).json({
-      message: "Getting all bookmarks for the user",
+      message: `Getting all bookmarks for the user ${userId}`,
+      data: resFromService,
     });
   } catch (err) {
     res.status(500).json({
@@ -19,22 +22,43 @@ const getBookmarksOfUser = async (req, res) => {
 
 const addPostToBookmarkList = async (req, res) => {
   try {
-    const resFromService = await bookmarkService.addPostToBookmarkList();
+    const { userId } = req.params;
+    const { postId, bookmarkListName } = req.body;
+
+    console.log(
+      `Will add to Post ${postId}; with bookmarkList named ${bookmarkListName} for the user ${userId}`,
+    );
+    const resFromService = await bookmarkService.addPostToBookmarkList(
+      userId,
+      postId,
+      bookmarkListName,
+    );
+
     res.status(200).json({
-      message: "Adding post to the bookmark list",
+      message: `Post ${postId} added to bookmarkList named ${bookmarkListName} for the user ${userId}`,
+      response: resFromService,
     });
   } catch (err) {
     res.status(500).json({
       message: "Internal Server Error",
+      err,
     });
   }
 };
 
 const removePostFromBookmarkList = async (req, res) => {
   try {
-    const resFromService = await bookmarkService.removePostFromBookmarkList();
+    const { userId } = req.params;
+    const { postId, bookmarkListName } = req.body;
+    const resFromService = await bookmarkService.removePostFromBookmarkList(
+      userId,
+      postId,
+      bookmarkListName,
+    );
+
     res.status(200).json({
-      message: "Removing post from the bookmark list",
+      message: `Post ${postId} removed from bookmarkList named ${bookmarkListName} for the user ${userId}`,
+      response: resFromService,
     });
   } catch (err) {
     res.status(500).json({
@@ -44,7 +68,7 @@ const removePostFromBookmarkList = async (req, res) => {
 };
 
 export const bookmarkController = {
-  getBookmarksOfUser,
+  getBookmarkListOfUser,
   addPostToBookmarkList,
   removePostFromBookmarkList,
 };

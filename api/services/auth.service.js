@@ -1,5 +1,5 @@
 import bcrypt from "bcrypt";
-import User from "../models/auth.model.js";
+import { User } from "../models/index.js";
 
 import jwt from "jsonwebtoken";
 
@@ -30,7 +30,7 @@ const loginService = async ({ email, password }) => {
 
 const registerService = async (
   { firstname, lastname, email, password, confirmpassword },
-  res
+  res,
 ) => {
   const savedUser = await User.findOne({ email });
   if (savedUser) {
@@ -50,7 +50,11 @@ const registerService = async (
       addressline1: "",
       employeeId: "",
       city: "",
+      isActive: true,
       pinCode: "",
+      subscribedTo: [],
+      bookmarkLists: [],
+      profilePicture: "",
     });
     user.save((err, data) => {
       if (err) {

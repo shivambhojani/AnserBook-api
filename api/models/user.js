@@ -1,6 +1,6 @@
-import { ObjectId } from "mongodb";
 import mongoose from "mongoose";
 const { Schema } = mongoose;
+import { ObjectId } from "mongodb";
 
 const UserSchema = new Schema({
   firstname: {
@@ -30,9 +30,19 @@ const UserSchema = new Schema({
   pinCode: {
     type: String,
   },
-  subscribeTo: [
+  subscribedTo: [
     {
       type: ObjectId,
+    },
+  ],
+  bookmarkLists: [
+    {
+      bookmarkListName: String,
+      postIds: [
+        {
+          type: String,
+        },
+      ],
     },
   ],
 });

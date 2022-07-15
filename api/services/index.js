@@ -7,6 +7,8 @@ import { bookmarkService } from "./bookmark.service.js";
 import { offer_appreciationService } from "./offer_appreciation.service.js";
 import { subscriptionService } from "./subscription.service.js";
 
+import { userprofileService } from "./userprofile.service.js";
+import { userImageService } from "./userimage.service.js";
 export {
   homeService,
   postsService,
@@ -16,4 +18,6 @@ export {
   authService,
   bookmarkService,
   subscriptionService,
+  userprofileService,
+  userImageService,
 };

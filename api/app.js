@@ -1,7 +1,7 @@
 import express from "express";
 import { PORT, CONNECTION_URL } from "./constants/index.js";
 import { mongoose } from "mongoose";
-
+import cors from "cors";
 import {
   homeRoute,
   postsRoute,
@@ -11,8 +11,8 @@ import {
   authRoute,
   bookmarkRoute,
   subscriptionRoute,
+  userprofileRoute,
 } from "./routes/index.js";
-import cors from "cors";
 
 const app = express();
 
@@ -28,6 +28,7 @@ app.use("/offerscore", offer_appreciationRoute);
 app.use("/bookmark", bookmarkRoute);
 app.use("/", subscriptionRoute);
 app.use("/", homeRoute);
+app.use("/userprofile", userprofileRoute);
 
 mongoose
   .connect(CONNECTION_URL, {
@@ -42,3 +43,7 @@ mongoose
   .catch((error) => {
     console.log("Error-=-=-", error.message);
   });
+
+// app.listen(PORT, () => {
+//   console.log(`Example app listening on port ${PORT}`);
+// });

@@ -29,6 +29,13 @@ const UserSchema = new mongoose.Schema({
   pinCode: {
     type: "string",
   },
+  profilePicture: {
+    type: "string",
+  },
+  isActive: {
+    type: "boolean",
+    default: true,
+  },
   subscribeTo: [
     {
       type: ObjectId,
