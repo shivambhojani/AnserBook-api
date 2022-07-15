@@ -3,10 +3,11 @@
  * @description: Controllers for Subscription
  */
 import { subscriptionService } from "../services/index.js";
+import mongoose from "mongoose";
 
 const subscribeUser = async (req, res) => {
   const { loggedInUserId, SubscribeToUserId } = req.body;
-
+  console.log("SubscribeToUserId", SubscribeToUserId);
   try {
     const user = await subscriptionService.subscribeUser(
       loggedInUserId,
@@ -18,6 +19,8 @@ const subscribeUser = async (req, res) => {
       status: true,
     });
   } catch (err) {
+    console.log("error", err);
+
     res.status(500).json({
       message: "Internal Server Error",
       status: false,
@@ -38,6 +41,7 @@ const unSubscribeUser = async (req, res) => {
       status: true,
     });
   } catch (err) {
+    console.log("error", err);
     res.status(500).json({
       message: "Internal Server Error",
       status: false,
