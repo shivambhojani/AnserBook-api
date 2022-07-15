@@ -1,10 +1,11 @@
 import mongoose from "mongoose";
 const ObjectId = mongoose.Types.ObjectId;
+import { appreciationService } from "../services/index.js";
 
 import { Post } from "../models/index.js";
 
 // Service to get all posts
-const getAllPosts = async id => {
+const getAllPosts = async (id) => {
   const posts = await Post.aggregate([
     {
       $lookup: {
@@ -22,14 +23,15 @@ const getAllPosts = async id => {
 };
 
 // Service to save the post
-const insertAPost = async post => {
+const insertAPost = async (post) => {
   const newPost = await Post.create(post);
 
   await newPost.save();
+  appreciationService.incrementPostsScore({ post });
 };
 
 // Service to delete a post by id
-const deleteAPost = async id => {
+const deleteAPost = async (id) => {
   const post = await Post.deleteOne({ _id: id });
 
   console.log(post);
@@ -44,7 +46,7 @@ const updateAPost = async (id, reqBody) => {
 
   const post = await Post.updateOne(
     { _id: id },
-    { body: reqBody.body, tags: reqBody.tags, type: reqBody.type },
+    { body: reqBody.body, tags: reqBody.tags, type: reqBody.type }
   );
 
   return post;
