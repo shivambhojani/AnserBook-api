@@ -42,9 +42,14 @@ const currentUser = async (req, res) => {
     let email = req.query.email;
     console.log(email)
     let firstname = req.body.firstname;
+    let lastname = req.body.lastname;
+    let addressline1 = req.body.addressline1;
+    let city = req.body.city;
+    let mobile = req.body.mobile;
+    let pincode = req.body.pincode;
     try{
-  
-      const updateuser = await userprofileService.updatecurrentUser(email, firstname);
+      const updateuser = await userprofileService.updatecurrentUser(
+        email, firstname, lastname, addressline1, city, mobile, pincode);
       const user = await userprofileService.getcurrentUser(email);
       res.status(200).json({
         status: true,

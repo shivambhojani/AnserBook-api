@@ -88,7 +88,7 @@ const makeinactive = async (email) => {
 
 }
 
-const updatecurrentUser = async (email, firstname) => {
+const updatecurrentUser = async (email, firstname, lastname, addressline1, city, mobile, pincode) => {
 
   const finduser = await User.findOne({ email: email });
 
@@ -100,7 +100,12 @@ const updatecurrentUser = async (email, firstname) => {
       {
         $set:
         {
-          firstname: newfirstname
+          firstname: firstname,
+          lastname:lastname,
+          addressline1:addressline1,
+          city:city,
+          mobile:mobile,
+          pincode:pincode
         }
       });
     // userafterupdate = await User.findOne({ email: email });

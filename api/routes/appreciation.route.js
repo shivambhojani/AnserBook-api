@@ -3,10 +3,10 @@ import { appreciationController } from "../controllers/index.js";
 
 const appreciationRoute = Router();
 
+appreciationRoute.post("/", appreciationController.createAppreciation);
 appreciationRoute.put("/", appreciationController.updateAppreciation);
 appreciationRoute.get("/:userid", appreciationController.getAppreciation);
 appreciationRoute.put("/likes", appreciationController.incrementLikesScore);
-appreciationRoute.post("/", appreciationController.createAppreciation);
 appreciationRoute.put(
   "/comments",
   appreciationController.incrementCommentsScore
