@@ -21,7 +21,6 @@ app.use(cors());
 // app.use("/", homeRoute);
 app.use("/posts", postsRoute);
 app.use("/auth", authRoute);
-app.use("/feed", postsRoute);
 app.use("/feeds", feedsRoute);
 app.use("/appreciation", appreciationRoute);
 app.use("/offerscore", offer_appreciationRoute);

@@ -67,8 +67,25 @@ const addReactions = async (req, res) => {
     });
   }
 };
+const getStarEmployees = async (req, res) => {
+  try {
+    const starEmployees = await feedService.getStarEmployees();
+
+    res.status(200).json({
+      status: true,
+      message: starEmployees,
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({
+      message: "Internal Server Error",
+      status: false,
+    });
+  }
+};
 
 export const feedsController = {
   getFeeds,
   addReactions,
+  getStarEmployees,
 };
