@@ -38,7 +38,7 @@ const UserSchema = new mongoose.Schema({
   },
   subscribedTo: [
     {
-      type: String,
+      type: ObjectId,
     },
   ],
   bookmarkLists: [
@@ -46,7 +46,7 @@ const UserSchema = new mongoose.Schema({
       bookmarkListName: String,
       postIds: [
         {
-          type: ObjectId,
+          type: String,
         },
       ],
     },
