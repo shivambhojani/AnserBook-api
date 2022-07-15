@@ -4,37 +4,35 @@ const { Schema } = mongoose;
 
 const UserSchema = new Schema({
   firstname: {
-    type: "string",
+    type: String,
   },
   lastname: {
-    type: "string",
+    type: String,
   },
   email: {
-    type: "string",
+    type: String,
   },
   password: {
-    type: "string",
+    type: String,
   },
   employeeId: {
-    type: "string",
+    type: String,
   },
   addressline1: {
-    type: "string",
+    type: String,
   },
   mobile: {
-    type: "string",
+    type: String,
   },
   city: {
-    type: "string",
+    type: String,
   },
   pinCode: {
-    type: "string",
+    type: String,
   },
   subscribeTo: [
     {
-      userId: {
-        type: "string",
-      },
+      type: ObjectId,
     },
   ],
 });

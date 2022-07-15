@@ -1,3 +1,7 @@
+/*
+ * @author: Shivangi Bhatt
+ * @description: Feeds services
+ */
 import Post from "../models/post.js";
 import Appreciation from "../models/appreciation.js";
 

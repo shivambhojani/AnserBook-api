@@ -10,6 +10,7 @@ import {
   offer_appreciationRoute,
   authRoute,
   bookmarkRoute,
+  subscriptionRoute,
 } from "./routes/index.js";
 import cors from "cors";
 
@@ -25,6 +26,7 @@ app.use("/feeds", feedsRoute);
 app.use("/appreciation", appreciationRoute);
 app.use("/offerscore", offer_appreciationRoute);
 app.use("/bookmark", bookmarkRoute);
+app.use("/", subscriptionRoute);
 app.use("/", homeRoute);
 
 mongoose
@@ -34,9 +36,9 @@ mongoose
   })
   .then(() => {
     app.listen(PORT, () =>
-      console.log("⚡[server]: Server is running on port:", PORT),
+      console.log("⚡[server]: Server is running on port:", PORT)
     );
   })
-  .catch(error => {
+  .catch((error) => {
     console.log("Error-=-=-", error.message);
   });

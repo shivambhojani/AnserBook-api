@@ -1,3 +1,7 @@
+/*
+ * @author: Shivangi Bhatt
+ * @description: Controllers for feeds
+ */
 import { feedService } from "../services/index.js";
 
 // Get all feeds
