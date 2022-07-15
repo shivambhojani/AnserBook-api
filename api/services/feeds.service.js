@@ -81,7 +81,22 @@ const getHotTopics = async () => {
       },
     },
     { $unwind: "$user" },
-    { $sort: { createdOn: -1 } },
+    {
+      $project: {
+        _id: 1,
+        userId: 1,
+        topic: 1,
+        body: 1,
+        tags: 1,
+        type: 1,
+        createdOn: 1,
+        updatedOn: 1,
+        reactions: 1,
+        user: 1,
+        reactionCount: { $size: "$reactions" },
+      },
+    },
+    { $sort: { reactionCount: -1 } },
   ]);
   return posts;
 };
