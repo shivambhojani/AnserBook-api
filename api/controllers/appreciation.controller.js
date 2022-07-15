@@ -15,6 +15,21 @@ const updateAppreciation = async (req, res) => {
   }
 };
 
+const createAppreciation = async (req, res) => {
+  const post = req.body;
+  try {
+    const serviceResponse = await appreciationService.createAppreciation(post);
+
+    res.status(200).json({
+      message: "ok",
+    });
+  } catch (err) {
+    res.status(500).json({
+      message: "Internal Server Error",
+    });
+  }
+};
+
 // Get a post based on the id
 const getAppreciation = async (req, res) => {
   const { userid } = req.params;
@@ -32,7 +47,76 @@ const getAppreciation = async (req, res) => {
   }
 };
 
+const incrementLikesScore = async (req, res) => {
+  try {
+    const body = req.body;
+    await appreciationService.incrementLikesScore(body);
+
+    res.status(200).json({
+      message: "ok",
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({
+      message: "Internal Server Error",
+    });
+  }
+};
+
+const incrementCommentsScore = async (req, res) => {
+  try {
+    const body = req.body;
+    await appreciationService.incrementCommentsScore(body);
+
+    res.status(200).json({
+      message: "ok",
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({
+      message: "Internal Server Error",
+    });
+  }
+};
+
+const incrementBestAnswerScore = async (req, res) => {
+  try {
+    const body = req.body;
+    await appreciationService.incrementBestAnswerScore(body);
+
+    res.status(200).json({
+      message: "ok",
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({
+      message: "Internal Server Error",
+    });
+  }
+};
+
+const incrementPostsScore = async (req, res) => {
+  try {
+    const body = req.body;
+    await appreciationService.incrementPostsScore(body);
+
+    res.status(200).json({
+      message: "ok",
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({
+      message: "Internal Server Error",
+    });
+  }
+};
+
 export const appreciationController = {
   updateAppreciation,
   getAppreciation,
+  incrementLikesScore,
+  createAppreciation,
+  incrementCommentsScore,
+  incrementBestAnswerScore,
+  incrementPostsScore,
 };
