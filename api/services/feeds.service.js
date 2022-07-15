@@ -1,5 +1,13 @@
+/*
+ * @author: Shivangi Bhatt
+ * @description: Feeds services
+ */
 import Post from "../models/post.js";
+<<<<<<< HEAD
 import { appreciationService } from "../services/index.js";
+=======
+import Appreciation from "../models/appreciation.js";
+>>>>>>> c58aaeafc030d14bb4b9a969d8f4d25e0f26bd4e
 
 // Service to get all posts
 const getAllPosts = async () => {
@@ -77,7 +85,22 @@ const getHotTopics = async () => {
       },
     },
     { $unwind: "$user" },
-    { $sort: { createdOn: -1 } },
+    {
+      $project: {
+        _id: 1,
+        userId: 1,
+        topic: 1,
+        body: 1,
+        tags: 1,
+        type: 1,
+        createdOn: 1,
+        updatedOn: 1,
+        reactions: 1,
+        user: 1,
+        reactionCount: { $size: "$reactions" },
+      },
+    },
+    { $sort: { reactionCount: -1 } },
   ]);
   return posts;
 };
@@ -100,6 +123,36 @@ const addReactions = async (id, reaction, userId, userName) => {
   return posts;
 };
 
+const getStarEmployees = async () => {
+  const starEmployees = await Appreciation.aggregate([
+    {
+      $project: {
+        userId: 1,
+        totalScore: {
+          $sum: [
+            "$likesScore",
+            "$commentsScore",
+            "$bestAnswerScore",
+            "$postsScore",
+          ],
+        },
+      },
+    },
+    {
+      $lookup: {
+        from: "users",
+        localField: "userId",
+        foreignField: "_id",
+        as: "user",
+      },
+    },
+    { $unwind: "$user" },
+    { $sort: { totalScore: -1 } },
+    { $limit: 5 },
+  ]);
+  return starEmployees;
+};
+
 export const feedService = {
   getAllPosts,
   getAllSocialPosts,
@@ -107,4 +160,5 @@ export const feedService = {
   getAllSubscribedPosts,
   getHotTopics,
   addReactions,
+  getStarEmployees,
 };

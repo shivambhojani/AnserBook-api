@@ -1,7 +1,7 @@
-import Offer_appreciation from "../models/offer_appreciation.js";
+import { Offer_appreciation } from "../models/index.js";
 
 // Service to save the post
-const updateAppreciation = async (appreciation) => {
+const updateAppreciation = async appreciation => {
   const appreciationSet = await Offer_appreciation.updateOne(appreciation);
 };
 

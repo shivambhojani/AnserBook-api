@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 const ObjectId = mongoose.Types.ObjectId;
 import { appreciationService } from "../services/index.js";
 
-import Post from "../models/post.js";
+import { Post } from "../models/index.js";
 
 // Service to get all posts
 const getAllPosts = async (id) => {

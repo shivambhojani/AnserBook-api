@@ -1,22 +1,21 @@
-import Appreciation from "../models/appreciation.js";
-import Offer_appreciation from "../models/offer_appreciation.js";
+import { Appreciation, Offer_appreciation } from "../models/index.js";
 
 // Service to save the post
-const updateAppreciation = async (appreciation) => {
+const updateAppreciation = async appreciation => {
   const appreciationSet = await Appreciation.updateOne(appreciation);
 };
 
-const createAppreciation = async (appreciation) => {
+const createAppreciation = async appreciation => {
   const appreciationSet = await Appreciation.create(appreciation);
   await appreciationSet.save();
 };
 
-const getAppreciation = async (userid) => {
+const getAppreciation = async userid => {
   const appreciation = await Appreciation.findOne({ userId: userid });
   return appreciation;
 };
 
-const incrementLikesScore = async (user) => {
+const incrementLikesScore = async user => {
   const userid = user.userId;
 
   const appreciation = await Appreciation.findOne({
@@ -29,7 +28,7 @@ const incrementLikesScore = async (user) => {
   await Appreciation.updateOne({ userId: appreciation.userId }, appreciation);
 };
 
-const incrementCommentsScore = async (user) => {
+const incrementCommentsScore = async user => {
   const userid = user.userId;
   const appreciation = await Appreciation.findOne({
     userId: userid,
@@ -42,7 +41,7 @@ const incrementCommentsScore = async (user) => {
   await Appreciation.updateOne({ userId: appreciation.userId }, appreciation);
 };
 
-const incrementBestAnswerScore = async (user) => {
+const incrementBestAnswerScore = async user => {
   const userid = user.userId;
   const appreciation = await Appreciation.findOne({
     userId: userid,
@@ -55,7 +54,7 @@ const incrementBestAnswerScore = async (user) => {
   await Appreciation.updateOne({ userId: appreciation.userId }, appreciation);
 };
 
-const incrementPostsScore = async (user) => {
+const incrementPostsScore = async user => {
   const userid = user.userId;
   console.log("hehe" + userid);
 
