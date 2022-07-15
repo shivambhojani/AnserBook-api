@@ -9,6 +9,7 @@ import {
   appreciationRoute,
   offer_appreciationRoute,
   authRoute,
+  bookmarkRoute,
 } from "./routes/index.js";
 import cors from "cors";
 
@@ -24,6 +25,7 @@ app.use("/feed", postsRoute);
 app.use("/feeds", feedsRoute);
 app.use("/appreciation", appreciationRoute);
 app.use("/offerscore", offer_appreciationRoute);
+app.use("/bookmark", bookmarkRoute);
 app.use("/", homeRoute);
 
 mongoose
