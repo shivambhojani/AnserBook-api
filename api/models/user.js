@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 const { Schema } = mongoose;
+import { ObjectId } from "mongodb";
 
 const UserSchema = new Schema({
   firstname: {
@@ -31,9 +32,7 @@ const UserSchema = new Schema({
   },
   subscribedTo: [
     {
-      userId: {
-        type: String,
-      },
+      type: ObjectId,
     },
   ],
   bookmarkLists: [
