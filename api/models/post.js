@@ -14,7 +14,7 @@ const postSchema = new Schema({
     {
       emoji: String, // String name of reaction
       by: String, // String of persons name
-      userEmail: String,
+      id: String,
     },
   ],
 });

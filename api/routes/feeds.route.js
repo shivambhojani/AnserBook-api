@@ -9,5 +9,6 @@ import { feedsController } from "../controllers/index.js";
 const feedsRoute = Router();
 
 feedsRoute.get("/:filter", feedsController.getFeeds);
+feedsRoute.post("/addReactions/:id", feedsController.addReactions);
 
 export default feedsRoute;

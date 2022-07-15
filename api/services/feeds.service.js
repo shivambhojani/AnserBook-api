@@ -81,10 +81,28 @@ const getHotTopics = async () => {
   return posts;
 };
 
+const addReactions = async (id, reaction, userId, userName) => {
+  console.log("userId", userId);
+  const posts = await Post.updateOne(
+    { _id: id },
+    {
+      $push: {
+        reactions: {
+          emoji: reaction, // String name of reaction
+          by: userName, // String of persons name
+          id: userId,
+        },
+      },
+    }
+  );
+  return posts;
+};
+
 export const feedService = {
   getAllPosts,
   getAllSocialPosts,
   getAllTechnicalPosts,
   getAllSubscribedPosts,
   getHotTopics,
+  addReactions,
 };
