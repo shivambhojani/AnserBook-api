@@ -7,11 +7,13 @@ import User from "../models/auth.model.js";
 
 // Service to get all posts
 const subscribeUser = async (loggedInUserId, SubscribeToUserId) => {
+  console.log("SubscribeToUserId", SubscribeToUserId);
+
   const user = await User.updateOne(
     { _id: loggedInUserId },
     {
       $push: {
-        subscribeTo: SubscribeToUserId,
+        subscribedTo: SubscribeToUserId,
       },
     }
   );
@@ -22,7 +24,7 @@ const unsubscribeUser = async (loggedInUserId, SubscribeToUserId) => {
     { _id: loggedInUserId },
     {
       $pull: {
-        subscribeTo: SubscribeToUserId,
+        subscribedTo: SubscribeToUserId,
       },
     }
   );
