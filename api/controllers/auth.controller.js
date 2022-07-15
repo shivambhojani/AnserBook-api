@@ -1,8 +1,13 @@
 import { authService } from "../services/index.js";
 
 // for login
-const loginUser = (req, res) => {
-  const loginUser = authService.loginService(req.body, res);
+const loginUser = async (req, res) => {
+  try {
+    const result = await authService.loginService(req.body, res);
+    res.status(200).json(result);
+  } catch (err) {
+    res.status(500).json(result);
+  }
 };
 
 const registerUser = (req, res) => {

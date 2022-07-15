@@ -29,7 +29,7 @@ const UserSchema = new mongoose.Schema({
     type: "string",
   },
   profilePicture: {
-    type: " string",
+    type: "string",
   },
   subscribeTo: [
     {

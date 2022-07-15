@@ -3,11 +3,14 @@ import User from "../models/auth.model.js";
 
 import jwt from "jsonwebtoken";
 
-const loginService = async ({ email, password }) => {
+const loginService = async ({ email, password }, res) => {
+  console.log("email from client====" + email);
+  console.log("password from client====" + password);
+
   const savedUser = await User.findOne({ email: email });
   console.log(savedUser);
 
-  if (savedUser) {
+  if (savedUser != null) {
     const isMatch = await bcrypt.compare(password, savedUser.password);
     console.log("here");
 
@@ -16,15 +19,12 @@ const loginService = async ({ email, password }) => {
     if (isMatch) {
       console.log("success.");
       console.log(token);
-      return token;
+      return { message: "ok", token }; // what to return if user is not register.
     } else {
-      res.status(500).json({
-        message: "user login failed",
-      });
-      console.log("wrong credentials.");
+      return { message: "Password doesn't match", token: "" }; // what to return if user is not register.
     }
   } else {
-    return; // what to return if user is not register.
+    return { message: "User doesn't exsist", token: "" }; // what to return if user is not register.
   }
 };
 
