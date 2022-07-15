@@ -27,7 +27,8 @@ const insertAPost = async (post) => {
   const newPost = await Post.create(post);
 
   await newPost.save();
-  appreciationService.incrementPostsScore({ post });
+  const { userId } = post;
+  appreciationService.incrementPostsScore({ userId });
 };
 
 // Service to delete a post by id
