@@ -38,7 +38,7 @@ const UserSchema = new mongoose.Schema({
   },
   subscribedTo: [
     {
-      type: String,
+      type: ObjectId,
     },
   ],
   bookmarkLists: [
