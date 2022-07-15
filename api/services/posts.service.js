@@ -1,23 +1,24 @@
 import mongoose from "mongoose";
+const ObjectId = mongoose.Types.ObjectId;
 
 import Post from "../models/post.js";
 
 // Service to get all posts
-const getAllPosts = async () => {
-  const posts = await Post.find();
+const getAllPosts = async (id) => {
+  const posts = await Post.aggregate([
+    {
+      $lookup: {
+        from: "users",
+        localField: "userId",
+        foreignField: "_id",
+        as: "user",
+      },
+    },
+    { $unwind: "$user" },
+    { $match: { userId: ObjectId(id) } },
+  ]);
 
   return posts;
-};
-
-// Service to get a post by id
-const getAPost = async (id) => {
-  console.log(id);
-
-  const post = await Post.findOne({ userId: id });
-
-  console.log(post);
-
-  return post.filter((post) => post.userId == id);
 };
 
 // Service to save the post
@@ -25,12 +26,30 @@ const insertAPost = async (post) => {
   const newPost = await Post.create(post);
 
   await newPost.save();
+};
 
-  console.log(newPost);
+// Service to delete a post by id
+const deleteAPost = async (id) => {
+  const post = await Post.deleteOne({_id: id})
+
+  console.log(post);
+
+  return post
+};
+
+// Service to update a post by id
+const updateAPost = async (id, reqBody) => {
+  console.log(id);
+  console.log(reqBody);
+  
+  const post = await Post.updateOne({_id: id}, {body: reqBody.body, tags: reqBody.tags, type: reqBody.type});
+
+  return post
 };
 
 export const postsService = {
   getAllPosts,
-  getAPost,
   insertAPost,
+  deleteAPost,
+  updateAPost
 };
