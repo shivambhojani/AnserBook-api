@@ -5,7 +5,8 @@ import { feedService } from "./feeds.service.js";
 import { appreciationService } from "./appreciation.service.js";
 import { offer_appreciationService } from "./offer_appreciation.service.js";
 import { bookmarkService } from "./bookmark.service.js";
-
+import { userprofileService } from "./userprofile.service.js";
+import {userImageService} from "./userimage.service.js"
 export {
   homeService,
   postsService,
@@ -14,4 +15,6 @@ export {
   offer_appreciationService,
   authService,
   bookmarkService,
+  userprofileService, userImageService
 };
+

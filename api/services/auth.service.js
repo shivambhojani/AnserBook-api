@@ -50,9 +50,11 @@ const registerService = async (
       addressline1: "",
       employeeId: "",
       city: "",
+      isActive: true,
       pinCode: "",
       subscribedTo: [],
       bookmarkLists: [],
+      profilePicture: "",
     });
     user.save((err, data) => {
       if (err) {
