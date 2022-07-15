@@ -3,34 +3,38 @@ import { AuthUser } from "../models/index.js";
 
 import jwt from "jsonwebtoken";
 
-const loginService = async ({ email, password }) => {
-  const savedUser = await AuthUser.findOne({ email: email });
-  console.log(savedUser);
+const loginService = async ({ email, password }, res) => {
+  console.log("email from client====" + email);
+  console.log("password from client====" + password);
 
-  if (savedUser) {
-    const isMatch = await bcrypt.compare(password, savedUser.password);
-    console.log("here");
+  try {
+    const savedUser = await AuthUser.findOne({ email: email });
+    console.log(savedUser);
 
-    const token = jwt.sign(email, "Kuldeep");
+    if (savedUser != null) {
+      const isMatch = await bcrypt.compare(password, savedUser.password);
+      console.log("here");
 
-    if (isMatch) {
-      console.log("success.");
-      console.log(token);
-      return token;
+      const token = jwt.sign(email, "Kuldeep");
+
+      if (isMatch) {
+        console.log("success.");
+        console.log(token);
+        return { message: "ok", token }; // what to return if user is not register.
+      } else {
+        return { message: "Password doesn't match", token: "" }; // what to return if user is not register.
+      }
     } else {
-      res.status(500).json({
-        message: "user login failed",
-      });
-      console.log("wrong credentials.");
+      return { message: "User doesn't exsist", token: "" }; // what to return if user is not register.
     }
-  } else {
-    return; // what to return if user is not register.
+  } catch (err) {
+    console.log(err);
   }
 };
 
 const registerService = async (
   { firstname, lastname, email, password, confirmpassword },
-  res,
+  res
 ) => {
   const savedUser = await AuthUser.findOne({ email });
   if (savedUser) {
