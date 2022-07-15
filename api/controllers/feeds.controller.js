@@ -49,6 +49,26 @@ const getFeeds = async (req, res) => {
   }
 };
 
+const addReactions = async (req, res) => {
+  const { id } = req.params;
+  const { reaction, userId, userName } = req.body;
+  try {
+    await feedService.addReactions(id, reaction, userId, userName);
+
+    res.status(200).json({
+      status: true,
+      message: "Reaction added",
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({
+      message: "Internal Server Error",
+      status: false,
+    });
+  }
+};
+
 export const feedsController = {
   getFeeds,
+  addReactions,
 };
