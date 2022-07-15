@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 const { Schema } = mongoose;
 
 const appreciationSchema = new Schema({
-  userId: Number,
+  userId: Schema.Types.ObjectId,
   likesScore: Number,
   commentsScore: Number,
   bestAnswerScore: Number,
