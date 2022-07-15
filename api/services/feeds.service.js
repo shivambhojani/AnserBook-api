@@ -3,11 +3,8 @@
  * @description: Feeds services
  */
 import Post from "../models/post.js";
-<<<<<<< HEAD
 import { appreciationService } from "../services/index.js";
-=======
 import Appreciation from "../models/appreciation.js";
->>>>>>> c58aaeafc030d14bb4b9a969d8f4d25e0f26bd4e
 
 // Service to get all posts
 const getAllPosts = async () => {
@@ -117,7 +114,7 @@ const addReactions = async (id, reaction, userId, userName) => {
           id: userId,
         },
       },
-    }
+    },
   );
   appreciationService.incrementLikesScore({ userId });
   return posts;
