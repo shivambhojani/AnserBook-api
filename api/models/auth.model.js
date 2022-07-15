@@ -28,6 +28,9 @@ const UserSchema = new mongoose.Schema({
   pinCode: {
     type: "string",
   },
+  profilePicture: {
+    type: " string",
+  },
   subscribeTo: [
     {
       userId: {
