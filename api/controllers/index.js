@@ -5,6 +5,8 @@ import { feedsController } from "./feeds.controller.js";
 import { appreciationController } from "./appreciation.controller.js";
 import { offer_appreciationController } from "./offer_appreciation.controller.js";
 import { bookmarkController } from "./bookmark.controller.js";
+import { subscriptionController } from "./subscription.controller.js";
+
 import { userprofileController } from "./userprofile.controller.js";
 export {
   homeController,
@@ -14,6 +16,6 @@ export {
   offer_appreciationController,
   authController,
   bookmarkController,
-  userprofileController
+  subscriptionController,
+  userprofileController,
 };
-
