@@ -48,7 +48,6 @@ const currentUser = async (req, res) => {
     let mobile = req.body.mobile;
     let pincode = req.body.pincode;
     try{
-  
       const updateuser = await userprofileService.updatecurrentUser(
         email, firstname, lastname, addressline1, city, mobile, pincode);
       const user = await userprofileService.getcurrentUser(email);
