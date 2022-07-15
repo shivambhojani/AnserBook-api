@@ -2,11 +2,11 @@
  * Author: Saurabh Jayeshbhai Das <sr850847@dal.ca>
  * Feature: Bookmark Management
  */
-import { User } from "../models/index.js";
+import { AuthUser } from "../models/index.js";
 
 const getBookmarkListOfUser = async userId => {
   try {
-    const user = await User.findById(userId);
+    const user = await AuthUser.findById(userId);
 
     return user.bookmarkLists;
   } catch (error) {
@@ -16,7 +16,7 @@ const getBookmarkListOfUser = async userId => {
 
 const addPostToBookmarkList = async (userId, postId, addToBookmarkListName) => {
   try {
-    const user = await User.findById(userId);
+    const user = await AuthUser.findById(userId);
 
     for (let bmList of user.bookmarkLists) {
       if (bmList.bookmarkListName === addToBookmarkListName) {
@@ -43,7 +43,7 @@ const removePostFromBookmarkList = async (
   removeFromBookmarkListName,
 ) => {
   try {
-    const user = await User.findById(userId);
+    const user = await AuthUser.findById(userId);
 
     for (let bmList of user.bookmarkLists) {
       if (bmList.bookmarkListName === removeFromBookmarkListName) {

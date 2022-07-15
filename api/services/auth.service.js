@@ -1,10 +1,10 @@
 import bcrypt from "bcrypt";
-import { User } from "../models/index.js";
+import { AuthUser } from "../models/index.js";
 
 import jwt from "jsonwebtoken";
 
 const loginService = async ({ email, password }) => {
-  const savedUser = await User.findOne({ email: email });
+  const savedUser = await AuthUser.findOne({ email: email });
   console.log(savedUser);
 
   if (savedUser) {
@@ -32,7 +32,7 @@ const registerService = async (
   { firstname, lastname, email, password, confirmpassword },
   res,
 ) => {
-  const savedUser = await User.findOne({ email });
+  const savedUser = await AuthUser.findOne({ email });
   if (savedUser) {
     res.status(422).json({
       message: "user already exist",
@@ -41,20 +41,20 @@ const registerService = async (
   } else {
     const hpassword = await bcrypt.hash(password, 12);
     console.log("hashed pass:", hpassword);
-    const user = new User({
+    const user = new AuthUser({
       firstname,
       lastname,
-      password: hpassword,
       email,
-      mobile: "",
-      addressline1: "",
+      password: hpassword,
       employeeId: "",
+      addressline1: "",
+      mobile: "",
       city: "",
-      isActive: true,
       pinCode: "",
+      profilePicture: "",
+      isActive: true,
       subscribedTo: [],
       bookmarkLists: [],
-      profilePicture: "",
     });
     user.save((err, data) => {
       if (err) {
@@ -76,9 +76,9 @@ const registerService = async (
 
 const fpService = async ({ email, password }) => {
   const hp = await bcrypt.hash(password, 12);
-  const savedUser = await User.findOne({ email: email });
+  const savedUser = await AuthUser.findOne({ email: email });
   if (savedUser) {
-    User.updateOne({ email: email }, { password: hp }, (err, data) => {
+    AuthUser.updateOne({ email: email }, { password: hp }, (err, data) => {
       if (err) {
         res.status(500).json({
           message: "user update failed",
