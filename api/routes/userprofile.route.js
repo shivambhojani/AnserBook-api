@@ -17,6 +17,12 @@ userprofileRoute.get('/currentuser', userprofileController.currentUser);
 
 userprofileRoute.put('/currentuser', userprofileController.updatecurrentUser);
 
+userprofileRoute.put('/changepassword', userprofileController.updatePassword);
+
+userprofileRoute.put('/makeactive', userprofileController.makeactive);
+
+userprofileRoute.put('/makeinactive', userprofileController.makeinactive);
+
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, "images");
