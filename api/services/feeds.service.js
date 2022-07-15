@@ -123,6 +123,7 @@ const getStarEmployees = async () => {
     {
       $project: {
         userId: 1,
+        badge: 1,
         totalScore: {
           $sum: [
             "$likesScore",
