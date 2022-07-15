@@ -3,7 +3,7 @@ import { postsService } from "../services/index.js";
 // Get all posts
 const postsGET = async (req, res) => {
   const { id } = req.params;
-  console.log('In postsGET-->',id);
+  console.log("In postsGET-->", id);
 
   try {
     const posts = await postsService.getAllPosts(id);
@@ -68,20 +68,19 @@ const postsByIDDELETE = async (req, res) => {
 
   console.log(id);
 
-  try{
+  try {
     const post = await postsService.deleteAPost(id);
 
     res.status(200).json({
       message: "ok",
       post,
     });
-  }catch(err){
+  } catch (err) {
     console.log(err);
     res.status(500).json({
       message: "Internal Server Error",
     });
   }
-  
 };
 
 // Update a post based on the id
@@ -89,20 +88,19 @@ const postsByIDPUT = async (req, res) => {
   const { id } = req.params;
   const reqBody = req.body;
 
-  try{
+  try {
     const updateResponse = await postsService.updateAPost(id, reqBody);
 
     res.status(200).json({
       message: "ok",
       updateResponse,
     });
-  }catch(err){
+  } catch (err) {
     console.log(err);
     res.status(500).json({
       message: "Internal Server Error",
     });
   }
-  
 };
 
 export const postsController = {
