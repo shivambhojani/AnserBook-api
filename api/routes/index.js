@@ -5,6 +5,7 @@ import feedsRoute from "./feeds.route.js";
 import appreciationRoute from "./appreciation.route.js";
 import offer_appreciationRoute from "./offer_appreciation.route.js";
 import bookmarkRoute from "./bookmark.route.js";
+import userprofileRoute from "./userprofile.route.js";
 
 export {
   homeRoute,
@@ -14,4 +15,8 @@ export {
   offer_appreciationRoute,
   authRoute,
   bookmarkRoute,
+  userprofileRoute
 };
+
+
+
