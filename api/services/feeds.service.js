@@ -1,4 +1,5 @@
 import Post from "../models/post.js";
+import { appreciationService } from "../services/index.js";
 
 // Service to get all posts
 const getAllPosts = async () => {
@@ -95,6 +96,7 @@ const addReactions = async (id, reaction, userId, userName) => {
       },
     }
   );
+  appreciationService.incrementLikesScore({ userId });
   return posts;
 };
 

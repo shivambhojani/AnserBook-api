@@ -18,6 +18,7 @@ const getAppreciation = async (userid) => {
 
 const incrementLikesScore = async (user) => {
   const userid = user.userId;
+
   const appreciation = await Appreciation.findOne({
     userId: userid,
   });
@@ -56,6 +57,8 @@ const incrementBestAnswerScore = async (user) => {
 
 const incrementPostsScore = async (user) => {
   const userid = user.userId;
+  console.log("hehe" + userid);
+
   const appreciation = await Appreciation.findOne({
     userId: userid,
   });
