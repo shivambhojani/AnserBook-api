@@ -9,6 +9,7 @@ import {
   appreciationRoute,
   offer_appreciationRoute,
   authRoute,
+  bookmarkRoute,
 } from "./routes/index.js";
 import cors from "cors";
 
@@ -18,12 +19,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
-// app.use("/", homeRoute);
 app.use("/posts", postsRoute);
 app.use("/auth", authRoute);
 app.use("/feeds", feedsRoute);
 app.use("/appreciation", appreciationRoute);
 app.use("/offerscore", offer_appreciationRoute);
+app.use("/bookmark", bookmarkRoute);
+app.use("/", homeRoute);
 
 mongoose
   .connect(CONNECTION_URL, {
@@ -32,9 +34,9 @@ mongoose
   })
   .then(() => {
     app.listen(PORT, () =>
-      console.log("⚡[server]: Server is running on port:", PORT)
+      console.log("⚡[server]: Server is running on port:", PORT),
     );
   })
-  .catch((error) => {
+  .catch(error => {
     console.log("Error-=-=-", error.message);
   });
