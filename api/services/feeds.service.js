@@ -114,7 +114,7 @@ const addReactions = async (id, reaction, userId, userName) => {
           id: userId,
         },
       },
-    }
+    },
   );
   appreciationService.incrementLikesScore({ userId });
   return posts;
