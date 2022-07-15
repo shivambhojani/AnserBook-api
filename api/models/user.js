@@ -41,7 +41,7 @@ const UserSchema = new Schema({
       bookmarkListName: String,
       postIds: [
         {
-          type: Schema.Types.ObjectId,
+          type: String,
         },
       ],
     },

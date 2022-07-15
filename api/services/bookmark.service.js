@@ -17,40 +17,63 @@ const getBookmarkListOfUser = async userId => {
 const addPostToBookmarkList = async (userId, postId, addToBookmarkListName) => {
   try {
     const user = await User.findById(userId);
-    let postAdded = false;
 
-    for (bmList of user.bookmarkLists) {
-      console.log("got list:", bmList.bookmarkListName);
+    for (let bmList of user.bookmarkLists) {
       if (bmList.bookmarkListName === addToBookmarkListName) {
-        console.log("Gt so editing!!");
         bmList.postIds.push(postId);
-        postAdded = true;
-        break;
+        user.save();
+        return `Added to list ${addToBookmarkListName}`;
       }
     }
 
-    if (!postAdded) {
-      console.log("Not got so creating new!!");
-      user.bookmarkLists.push({
-        bookmarkListName: addToBookmarkListName,
-        postIds: [postId],
-      });
-    }
-
-    const res = await User.findByIdAndUpdate(userId, user);
-    return res;
+    user.bookmarkLists.push({
+      bookmarkListName: addToBookmarkListName,
+      postIds: [postId],
+    });
+    user.save();
+    return `Created new list ${addToBookmarkListName}`;
   } catch (error) {
     return error;
   }
 };
 
-const removePostFromBookmarkList = async (userId, postId, bookmarkListName) => {
-  const user = await User.findById(userId);
+const removePostFromBookmarkList = async (
+  userId,
+  postId,
+  removeFromBookmarkListName,
+) => {
+  try {
+    const user = await User.findById(userId);
 
-  user.bookmarkLists = user.bookmarkLists.push(postId);
+    for (let bmList of user.bookmarkLists) {
+      if (bmList.bookmarkListName === removeFromBookmarkListName) {
+        bmList.postIds.splice(bmList.postIds.indexOf(postId), 1);
+        break;
+      }
+    }
 
-  const res = await User.findByIdAndUpdate(userId, user);
-  return res;
+    // Check if there are no other postIds in the bookmark list, if so, remove the whole list
+    let listIndexToRemove = -1;
+    for (let i = 0; i < user.bookmarkLists.length; i++) {
+      if (
+        user.bookmarkLists[i].bookmarkListName === removeFromBookmarkListName &&
+        user.bookmarkLists[i].postIds.length === 0
+      ) {
+        listIndexToRemove = i;
+        break;
+      }
+    }
+    if (listIndexToRemove !== -1) {
+      user.bookmarkLists.splice(listIndexToRemove, 1);
+      console.log(
+        `Deleting the as their are no more posts in list ${removeFromBookmarkListName}`,
+      );
+    }
+    user.save();
+    return `Removed from list ${removeFromBookmarkListName}`;
+  } catch (error) {
+    return error;
+  }
 };
 
 export const bookmarkService = {
