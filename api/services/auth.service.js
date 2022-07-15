@@ -50,6 +50,7 @@ const registerService = async (
       addressline1: "",
       employeeId: "",
       city: "",
+      isActive:true,
       pinCode: "",
       profilePicture: "",
     });
