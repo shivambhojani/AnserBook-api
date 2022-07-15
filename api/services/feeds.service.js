@@ -1,4 +1,4 @@
-import Post from "../models/post.js";
+import { Post } from "../models/index.js";
 
 // Service to get all posts
 const getAllPosts = async () => {
@@ -93,7 +93,7 @@ const addReactions = async (id, reaction, userId, userName) => {
           id: userId,
         },
       },
-    }
+    },
   );
   return posts;
 };

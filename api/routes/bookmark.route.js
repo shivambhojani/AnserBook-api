@@ -8,12 +8,12 @@ import { bookmarkController } from "../controllers/index.js";
 const bookmarkRoute = Router();
 
 // get all bookmark lists for a user
-bookmarkRoute.get("/getAll/:userID", bookmarkController.getBookmarksOfUser);
+bookmarkRoute.get("/getAll/:userId", bookmarkController.getBookmarkListOfUser);
 // adding a post to an existing bookmark list or new one
-bookmarkRoute.post("/add/:userID", bookmarkController.addPostToBookmarkList);
+bookmarkRoute.post("/add/:userId", bookmarkController.addPostToBookmarkList);
 // remove a post to from a bookmark list
 bookmarkRoute.delete(
-  "/remove/:userID",
+  "/remove/:userId",
   bookmarkController.removePostFromBookmarkList,
 );
 
