@@ -35,14 +35,23 @@ const UserSchema = new mongoose.Schema({
     type: "boolean",
     default: true,
   },
-  subscribeTo: [
+  subscribedTo: [
     {
       userId: {
-        type: "string",
+        type: String,
       },
+    },
+  ],
+  bookmarkLists: [
+    {
+      bookmarkListName: String,
+      postIds: [
+        {
+          type: String,
+        },
+      ],
     },
   ],
 });
 
-const User = mongoose.model("user", UserSchema);
-export default User;
+export default mongoose.model("user", UserSchema);
