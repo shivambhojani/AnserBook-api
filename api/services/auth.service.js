@@ -1,14 +1,22 @@
 import bcrypt from "bcrypt";
 import User from "../models/auth.model.js";
 
+import jwt from "jsonwebtoken";
+
 const loginService = async ({ email, password }) => {
   const savedUser = await User.findOne({ email: email });
   console.log(savedUser);
+
   if (savedUser) {
     const isMatch = await bcrypt.compare(password, savedUser.password);
     console.log("here");
+
+    const token = jwt.sign(email, "Kuldeep");
+
     if (isMatch) {
       console.log("success.");
+      console.log(token);
+      return token;
     } else {
       res.status(500).json({
         message: "user login failed",
