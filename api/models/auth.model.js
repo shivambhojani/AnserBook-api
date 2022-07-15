@@ -46,7 +46,7 @@ const UserSchema = new mongoose.Schema({
       bookmarkListName: String,
       postIds: [
         {
-          type: ObjectId,
+          type: String,
         },
       ],
     },
