@@ -8,7 +8,8 @@ import { feedsController } from "../controllers/index.js";
 
 const feedsRoute = Router();
 
-feedsRoute.get("/:filter", feedsController.getFeeds);
+feedsRoute.get("/feeds/:filter", feedsController.getFeeds);
 feedsRoute.post("/addReactions/:id", feedsController.addReactions);
+feedsRoute.get("/getStarEmployees", feedsController.getStarEmployees);
 
 export default feedsRoute;

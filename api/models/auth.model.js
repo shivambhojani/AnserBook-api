@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { ObjectId } from "mongodb";
 
 const UserSchema = new mongoose.Schema({
   firstname: {
@@ -31,14 +32,25 @@ const UserSchema = new mongoose.Schema({
   profilePicture: {
     type: "string",
   },
-  subscribeTo: [
+  isActive: {
+    type: "boolean",
+    default: true,
+  },
+  subscribedTo: [
     {
-      userId: {
-        type: "string",
-      },
+      type: String,
+    },
+  ],
+  bookmarkLists: [
+    {
+      bookmarkListName: String,
+      postIds: [
+        {
+          type: ObjectId,
+        },
+      ],
     },
   ],
 });
 
-const User = mongoose.model("user", UserSchema);
-export default User;
+export default mongoose.model("user", UserSchema);

@@ -1,4 +1,9 @@
+/*
+ * @author: Shivangi Bhatt
+ * @description: Feeds services
+ */
 import Post from "../models/post.js";
+import Appreciation from "../models/appreciation.js";
 
 // Service to get all posts
 const getAllPosts = async () => {
@@ -98,6 +103,36 @@ const addReactions = async (id, reaction, userId, userName) => {
   return posts;
 };
 
+const getStarEmployees = async () => {
+  const starEmployees = await Appreciation.aggregate([
+    {
+      $project: {
+        userId: 1,
+        totalScore: {
+          $sum: [
+            "$likesScore",
+            "$commentsScore",
+            "$bestAnswerScore",
+            "$postsScore",
+          ],
+        },
+      },
+    },
+    {
+      $lookup: {
+        from: "users",
+        localField: "userId",
+        foreignField: "_id",
+        as: "user",
+      },
+    },
+    { $unwind: "$user" },
+    { $sort: { totalScore: -1 } },
+    { $limit: 5 },
+  ]);
+  return starEmployees;
+};
+
 export const feedService = {
   getAllPosts,
   getAllSocialPosts,
@@ -105,4 +140,5 @@ export const feedService = {
   getAllSubscribedPosts,
   getHotTopics,
   addReactions,
+  getStarEmployees,
 };
