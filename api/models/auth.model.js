@@ -31,6 +31,10 @@ const UserSchema = new mongoose.Schema({
   profilePicture: {
     type: "string",
   },
+  isActive: {
+    type: "boolean",
+    default: true,
+  },
   subscribeTo: [
     {
       userId: {
