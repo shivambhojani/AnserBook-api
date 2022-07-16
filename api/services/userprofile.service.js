@@ -26,24 +26,27 @@ const getcurrentUser = async (email) => {
 const updatePassword = async (email, oldPassword, newPassword) => {
   console.log("update Password Service")
   const user = await getcurrentUser(email);
-
-  const oldhpassword = await bcrypt.hash(oldPassword, 12);
-
-  const validOldPassword = await bcrypt.compare(oldPassword, user.password);
-  console.log("validOldPassword", validOldPassword)
-  if (validOldPassword) {
-    console.log("Old Password is Valid")
-    const hpassword = await bcrypt.hash(newPassword, 12);
-    console.log('new hash', hpassword);
-    const updatePassword = User.updateOne(
-      { email: email },
-      {
-        $set:
+  try {
+    const holdpassword = await bcrypt.hash(oldPassword, 12);
+    const validOldPassword = await bcrypt.compare(oldPassword, user.password);
+    console.log("validOldPassword", validOldPassword)
+    if (validOldPassword) {
+      console.log("Old Password is Valid")
+      const hpassword = await bcrypt.hash(newPassword, 12);
+      console.log('new hash', hpassword);
+      const updatePassword = User.updateOne(
+        { email: email },
         {
-          password: hpassword
-        }
-      });
-    return updatePassword;
+          $set:
+          {
+            password: hpassword
+          }
+        });
+      return updatePassword;
+    }
+  } catch (err) {
+    console.log(err)
+    return err;
   }
 };
 
@@ -101,11 +104,11 @@ const updatecurrentUser = async (email, firstname, lastname, addressline1, city,
         $set:
         {
           firstname: firstname,
-          lastname:lastname,
-          addressline1:addressline1,
-          city:city,
-          mobile:mobile,
-          pincode:pincode
+          lastname: lastname,
+          addressline1: addressline1,
+          city: city,
+          mobile: mobile,
+          pincode: pincode
         }
       });
     // userafterupdate = await User.findOne({ email: email });
