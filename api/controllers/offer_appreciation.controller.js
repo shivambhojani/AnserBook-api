@@ -1,7 +1,10 @@
+/**
+ * @author aman singh bhandari
+ */
 import { offer_appreciationService } from "../services/index.js";
 
 const updateAppreciation = async (req, res) => {
-  const post = req.body;
+  const post = req.body; //offer appreciaition payload
   try {
     await offer_appreciationService.updateAppreciation(post);
 
@@ -15,10 +18,11 @@ const updateAppreciation = async (req, res) => {
   }
 };
 
-// Get a post based on the id
+// Get a appreciaiton based on the userid
 const getAppreciation = async (req, res) => {
+  //userid
   try {
-    const score_offered = await offer_appreciationService.getAppreciation();
+    const score_offered = await offer_appreciationService.getAppreciation(); //get the offered appreciaiton
 
     res.status(200).json({
       message: "ok",
