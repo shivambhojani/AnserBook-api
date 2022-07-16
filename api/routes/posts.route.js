@@ -4,6 +4,7 @@ import { postsController } from "../controllers/index.js";
 const postsRoute = Router();
 
 postsRoute.get("/:id", postsController.postsGET);
+postsRoute.get("/getOne/:id", postsController.postsByIDGET);
 postsRoute.post("/savePost", postsController.postsPOST);
 postsRoute.delete("/deletePost/:id", postsController.postsByIDDELETE);
 postsRoute.put("/putPost/:id", postsController.postsByIDPUT);
