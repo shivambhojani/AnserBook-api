@@ -20,12 +20,9 @@ const postsGET = async (req, res) => {
   }
 };
 
-/*
 // Get a post based on the id
 const postsByIDGET = async (req, res) => {
   const { id } = req.params;
-
-  console.log(id);
 
   try {
     const post = await postsService.getAPost(id);
@@ -40,7 +37,6 @@ const postsByIDGET = async (req, res) => {
     });
   }
 };
-*/
 
 // Post a new post
 const postsPOST = async (req, res) => {
@@ -105,6 +101,7 @@ const postsByIDPUT = async (req, res) => {
 
 export const postsController = {
   postsGET,
+  postsByIDGET,
   postsPOST,
   postsByIDDELETE,
   postsByIDPUT,
