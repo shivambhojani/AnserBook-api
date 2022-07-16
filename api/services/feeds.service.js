@@ -22,6 +22,9 @@ const getAllPosts = async () => {
   ]);
   return posts;
 };
+
+// Service to get all posts of social category
+
 const getAllSocialPosts = async () => {
   const posts = await Post.aggregate([
     {
@@ -39,6 +42,9 @@ const getAllSocialPosts = async () => {
 
   return posts;
 };
+
+// Service to get all posts of technical category
+
 const getAllTechnicalPosts = async () => {
   const posts = await Post.aggregate([
     {
@@ -56,6 +62,9 @@ const getAllTechnicalPosts = async () => {
 
   return posts;
 };
+
+// Service to get all posts of users that the logged in user has subscribed to
+
 const getAllSubscribedPosts = async () => {
   const posts = await Post.aggregate([
     {
@@ -71,6 +80,9 @@ const getAllSubscribedPosts = async () => {
   ]);
   return posts;
 };
+
+// Service to get all posts that are discussed or reacted more
+
 const getHotTopics = async () => {
   const posts = await Post.aggregate([
     {
@@ -102,6 +114,7 @@ const getHotTopics = async () => {
   return posts;
 };
 
+// Service to store reactions of the users
 const addReactions = async (id, reaction, userId, userName) => {
   console.log("userId", userId);
   const posts = await Post.updateOne(
@@ -114,11 +127,13 @@ const addReactions = async (id, reaction, userId, userName) => {
           id: userId,
         },
       },
-    },
+    }
   );
   appreciationService.incrementLikesScore({ userId });
   return posts;
 };
+
+// Service to get star employees of th user
 
 const getStarEmployees = async () => {
   const starEmployees = await Appreciation.aggregate([
