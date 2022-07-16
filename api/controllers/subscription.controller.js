@@ -5,6 +5,7 @@
 import { subscriptionService } from "../services/index.js";
 import mongoose from "mongoose";
 
+//Subscribe a user
 const subscribeUser = async (req, res) => {
   const { loggedInUserId, SubscribeToUserId } = req.body;
   console.log("SubscribeToUserId", SubscribeToUserId);
@@ -27,6 +28,9 @@ const subscribeUser = async (req, res) => {
     });
   }
 };
+
+//unSubscribe a user
+
 const unSubscribeUser = async (req, res) => {
   const { loggedInUserId, SubscribeToUserId } = req.body;
 
