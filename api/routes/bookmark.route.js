@@ -12,7 +12,7 @@ bookmarkRoute.get("/getAll/:userId", bookmarkController.getBookmarkListOfUser);
 // adding a post to an existing bookmark list or new one
 bookmarkRoute.post("/add/:userId", bookmarkController.addPostToBookmarkList);
 // remove a post to from a bookmark list
-bookmarkRoute.delete(
+bookmarkRoute.put(
   "/remove/:userId",
   bookmarkController.removePostFromBookmarkList,
 );
