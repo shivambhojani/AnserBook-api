@@ -6,8 +6,9 @@ import { appreciationController } from "./appreciation.controller.js";
 import { offer_appreciationController } from "./offer_appreciation.controller.js";
 import { bookmarkController } from "./bookmark.controller.js";
 import { subscriptionController } from "./subscription.controller.js";
-
+import { commentsController } from "./comments.controller.js";
 import { userprofileController } from "./userprofile.controller.js";
+
 export {
   homeController,
   postsController,
@@ -18,4 +19,5 @@ export {
   bookmarkController,
   subscriptionController,
   userprofileController,
+  commentsController,
 };
