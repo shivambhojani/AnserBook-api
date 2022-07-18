@@ -1,5 +1,6 @@
 import bcrypt from "bcrypt";
 import { AuthUser } from "../models/index.js";
+import { appreciationService } from "../services/index.js";
 
 import jwt from "jsonwebtoken";
 
@@ -60,7 +61,7 @@ const registerService = async (
       subscribedTo: [],
       bookmarkLists: [],
     });
-    user.save((err, data) => {
+    user.save(async (err, data) => {
       if (err) {
         res.status(500).json({
           message: "user save failed",
@@ -72,9 +73,15 @@ const registerService = async (
           message: "OK",
           data,
         });
-        console.log(data);
+        console.log("===== User saved ====== " + data);
+
+        const savedUser = await AuthUser.findOne({ email });
+        console.log("_id:::registration" + savedUser._id);
+        await appreciationService.createAppreciation(savedUser._id);
       }
     });
+
+    // console.log("email:::registration" + email);
   }
 };
 

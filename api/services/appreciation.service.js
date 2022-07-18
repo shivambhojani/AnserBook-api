@@ -9,8 +9,9 @@ const updateAppreciation = async (appreciation) => {
 };
 
 const createAppreciation = async (userId) => {
+  console.log("creating apprecation :: with userid ::" + userId);
   const appreciation = {
-    ...userid,
+    userId,
     likesScore: 0,
     commentsScore: 0,
     bestAnswerScore: 0,

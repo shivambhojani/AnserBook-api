@@ -1,7 +1,6 @@
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
 import User from "../models/auth.model.js";
-import { appreciationService } from "../services/index.js";
 
 const getAllUsers = async () => {
   const users = await User.find();
@@ -123,11 +122,8 @@ const updatecurrentUser = async (
 
 const postUser = async () => {
   const newUser = await User.create(user);
-  await newUser.save();
 
-  const { userId } = user;
-  console.log("userid appreciaitino :: " + userId);
-  const appreciation = await appreciationService.createAppreciation(userId); //initilaize appreciaition
+  await newUser.save();
 
   console.log(newUser);
 };

@@ -19,9 +19,10 @@ const updateAppreciation = async (req, res) => {
 };
 
 const createAppreciation = async (req, res) => {
-  const post = req.body; //appreciation payload
+  const { userId } = req.body; //appreciation payload
+  console.log("userId::" + userId);
   try {
-    const serviceResponse = await appreciationService.createAppreciation(post);
+    await appreciationService.createAppreciation(userId);
 
     res.status(200).json({
       message: "ok",

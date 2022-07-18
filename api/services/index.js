@@ -9,6 +9,8 @@ import { subscriptionService } from "./subscription.service.js";
 
 import { userprofileService } from "./userprofile.service.js";
 import { userImageService } from "./userimage.service.js";
+import { commentsService } from "./comments.service.js";
+
 export {
   homeService,
   postsService,
@@ -20,4 +22,5 @@ export {
   subscriptionService,
   userprofileService,
   userImageService,
+  commentsService,
 };

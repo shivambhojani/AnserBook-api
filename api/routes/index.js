@@ -7,6 +7,7 @@ import offer_appreciationRoute from "./offer_appreciation.route.js";
 import bookmarkRoute from "./bookmark.route.js";
 import subscriptionRoute from "./subscription.route.js";
 import userprofileRoute from "./userprofile.route.js";
+import commentsRoute from "./comments.route.js";
 
 export {
   homeRoute,
@@ -18,4 +19,5 @@ export {
   bookmarkRoute,
   subscriptionRoute,
   userprofileRoute,
+  commentsRoute,
 };
