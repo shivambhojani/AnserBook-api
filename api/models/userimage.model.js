@@ -5,10 +5,9 @@ const ImageSchema = mongoose.Schema({
         type:String,
     },
     image:{
-        data:Buffer,
-        contentType: String,
+        type:String,
     },
 })
 
-const Image = mongoose.model("ProfilePictures", ImageSchema);
+const Image = mongoose.model("UserImage1", ImageSchema);
 export default Image;
