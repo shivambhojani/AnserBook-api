@@ -121,7 +121,7 @@ const requestForgotPassword = (req, res) => {
     to: req.body.email, // Change to your recipient
     from: "kuldeepbhimani007@gmail.com", // Change to your verified sender
     subject: "Password reset link",
-    text: `http://localhost:3000/reset-password/${token}`,
+    text: `https://answerbook-group6.herokuapp.com/reset-password/${token}`,
   };
   sgMail
     .send(msg)
