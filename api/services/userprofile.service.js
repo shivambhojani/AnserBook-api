@@ -182,10 +182,6 @@ export const userprofileService = {
   updatePassword,
   makeactive,
   makeinactive,
-<<<<<<< HEAD
   uploadImage,
   getImage
 };
-=======
-};
->>>>>>> main
