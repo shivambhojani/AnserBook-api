@@ -123,14 +123,22 @@ const currentUser = async (req, res) => {
 
   const uploadImage = async (req, res) => {
     let email = req.query.email;
-    
-    console.log(email)
-    let firstname = req.body.firstname;
-    try{
 
+    let imageb64 = req.body.image;
+    console.log(email);
+    try{
+      const updateImage = await userprofileService.uploadImage(
+        email, imageb64).then((response)=>{
+          res.status(200).json({
+            response
+          })
+        });
+        
     }catch(err){
+      console.log(err)
       res.status(500).json({
         message: "Internal Server Error",
+        err
       });
     }
   };
@@ -156,6 +164,23 @@ const postsUser = async (req,res) => {
   
   };
   
+  const getImage = async (req, res) => {
+    let email = req.query.email;
+
+    try {
+      const userImage = await userprofileService.getImage(email); //update the appreciaition of a user
+  
+      res.status(200).json({
+        message: "ok",
+        userImage
+      });
+    } catch (err) {
+      res.status(500).json({
+        message: "Internal Server Error",
+      });
+    }
+};
+
   export const userprofileController = {
     usersGET,
     postsUser,
@@ -164,7 +189,8 @@ const postsUser = async (req,res) => {
     uploadImage,
     updatePassword,
     makeactive,
-    makeinactive
+    makeinactive,
+    getImage
   };
   
   
