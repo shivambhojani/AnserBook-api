@@ -38,6 +38,8 @@ const registerService = async (
   res
 ) => {
   const savedUser = await AuthUser.findOne({ email });
+  const token = jwt.sign(email, "Kuldeep");
+
   if (savedUser) {
     res.status(422).json({
       message: "user already exist",
@@ -72,6 +74,7 @@ const registerService = async (
         res.status(200).json({
           message: "OK",
           data,
+          token,
         });
         console.log("===== User saved ====== " + data);
 
