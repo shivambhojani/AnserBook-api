@@ -9,7 +9,7 @@ const getAllUsers = async () => {
 };
 
 const getcurrentUser = async (email) => {
-  console.log('user service')
+  console.log("user service");
   var user;
 
   try {
@@ -18,35 +18,34 @@ const getcurrentUser = async (email) => {
     // user = user.filter((user) => user.email == email)
 
     return user;
-  }
-  catch (error) {
+  } catch (error) {
     user = await User.find();
-  };
-}
+  }
+};
 
 const updatePassword = async (email, oldPassword, newPassword) => {
-  console.log("update Password Service")
+  console.log("update Password Service");
   const user = await getcurrentUser(email);
   try {
     const holdpassword = await bcrypt.hash(oldPassword, 12);
     const validOldPassword = await bcrypt.compare(oldPassword, user.password);
-    console.log("validOldPassword", validOldPassword)
+    console.log("validOldPassword", validOldPassword);
     if (validOldPassword) {
-      console.log("Old Password is Valid")
+      console.log("Old Password is Valid");
       const hpassword = await bcrypt.hash(newPassword, 12);
-      console.log('new hash', hpassword);
+      console.log("new hash", hpassword);
       const updatePassword = User.updateOne(
         { email: email },
         {
-          $set:
-          {
-            password: hpassword
-          }
-        });
+          $set: {
+            password: hpassword,
+          },
+        }
+      );
       return updatePassword;
     }
   } catch (err) {
-    console.log(err)
+    console.log(err);
     return err;
   }
 };
@@ -104,17 +103,16 @@ const makeactive = async (email) => {
     const makeuseractive = User.updateOne(
       { email: email },
       {
-        $set:
-        {
-          isActive: true
-        }
-      });
+        $set: {
+          isActive: true,
+        },
+      }
+    );
     const user1 = await getcurrentUser(email);
     console.log("User Active", user1.isActive);
     return makeuseractive;
   }
-
-}
+};
 
 const makeinactive = async (email) => {
   const user = await getcurrentUser(email);
@@ -125,44 +123,48 @@ const makeinactive = async (email) => {
     const makeuseractive = User.updateOne(
       { email: email },
       {
-        $set:
-        {
-          isActive: "false"
-        }
-      });
+        $set: {
+          isActive: "false",
+        },
+      }
+    );
     const user1 = await getcurrentUser(email);
     console.log("User Active", user1.isActive);
     return makeuseractive;
   }
+};
 
-}
-
-const updatecurrentUser = async (email, firstname, lastname, addressline1, city, mobile, pincode) => {
-
+const updatecurrentUser = async (
+  email,
+  firstname,
+  lastname,
+  addressline1,
+  city,
+  mobile,
+  pincode
+) => {
   const finduser = await User.findOne({ email: email });
 
   if (finduser) {
     let newfirstname = firstname;
-    console.log('newfirstname', newfirstname)
+    console.log("newfirstname", newfirstname);
     const updateuser = User.updateOne(
       { email: email },
       {
-        $set:
-        {
+        $set: {
           firstname: firstname,
           lastname: lastname,
           addressline1: addressline1,
           city: city,
           mobile: mobile,
-          pincode: pincode
-        }
-      });
+          pincode: pincode,
+        },
+      }
+    );
     // userafterupdate = await User.findOne({ email: email });
     return updateuser;
   }
-
-}
-
+};
 
 const postUser = async () => {
   const newUser = await User.create(user);
@@ -180,6 +182,10 @@ export const userprofileService = {
   updatePassword,
   makeactive,
   makeinactive,
+<<<<<<< HEAD
   uploadImage,
   getImage
 };
+=======
+};
+>>>>>>> main

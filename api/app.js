@@ -12,6 +12,7 @@ import {
   bookmarkRoute,
   subscriptionRoute,
   userprofileRoute,
+  commentsRoute,
 } from "./routes/index.js";
 
 const app = express();
@@ -29,6 +30,7 @@ app.use("/bookmark", bookmarkRoute);
 app.use("/", subscriptionRoute);
 app.use("/", homeRoute);
 app.use("/userprofile", userprofileRoute);
+app.use("/comment", commentsRoute);
 
 mongoose
   .connect(CONNECTION_URL, {
@@ -43,7 +45,3 @@ mongoose
   .catch((error) => {
     console.log("Error-=-=-", error.message);
   });
-
-// app.listen(PORT, () => {
-//   console.log(`Example app listening on port ${PORT}`);
-// });

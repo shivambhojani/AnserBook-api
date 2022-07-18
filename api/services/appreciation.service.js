@@ -8,7 +8,16 @@ const updateAppreciation = async (appreciation) => {
   const appreciationSet = await Appreciation.updateOne(appreciation); //update the single record of appreciaiton
 };
 
-const createAppreciation = async (appreciation) => {
+const createAppreciation = async (userId) => {
+  console.log("creating apprecation :: with userid ::" + userId);
+  const appreciation = {
+    userId,
+    likesScore: 0,
+    commentsScore: 0,
+    bestAnswerScore: 0,
+    postsScore: 0,
+    badge: "beginner",
+  };
   const appreciationSet = await Appreciation.create(appreciation); //create the appreciaiton document
   await appreciationSet.save();
 };
