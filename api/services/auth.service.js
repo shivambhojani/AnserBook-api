@@ -107,10 +107,12 @@ const fpService = async ({ email, password }) => {
         console.log(data);
       }
     });
+  } else {
+    return { message: "User doesn't exsist" };
   }
 };
 
-const requestForgotPassword = (req, res) => {
+const requestForgotPassword = async (req, res) => {
   const token = jwt.sign({ email: req.body.email }, "asdfghjklzxcvbnm", {
     expiresIn: "24h",
   });
@@ -123,21 +125,29 @@ const requestForgotPassword = (req, res) => {
     subject: "Password reset link",
     text: `https://answerbook-group6.herokuapp.com/reset-password/${token}`,
   };
-  sgMail
-    .send(msg)
-    .then(() => {
-      console.log("Email sent");
-      res.status(200).json({
-        success: true,
+  const savedUser = await AuthUser.findOne({ email: req.body.email });
+  if (savedUser != null) {
+    sgMail
+      .send(msg)
+      .then(() => {
+        console.log("Email sent");
+        res.status(200).json({
+          success: true,
+        });
+      })
+      .catch((error) => {
+        console.error(error);
+        res.status(500).json({
+          success: false,
+          message: error.message,
+        });
       });
-    })
-    .catch((error) => {
-      console.error(error);
-      res.status(500).json({
-        success: false,
-        message: error.message,
-      });
+  } else {
+    return res.status(500).json({
+      success: false,
+      message: "User doesn't exsist",
     });
+  }
 };
 
 const resetPassword = async (req, res) => {
