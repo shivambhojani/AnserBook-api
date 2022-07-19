@@ -1,9 +1,12 @@
+/**
+ * @author aman singh bhandari
+ */
 import { appreciationService } from "../services/index.js";
 
 const updateAppreciation = async (req, res) => {
-  const post = req.body;
+  const post = req.body; //appreciaiton payload
   try {
-    const serviceResponse = await appreciationService.updateAppreciation(post);
+    const serviceResponse = await appreciationService.updateAppreciation(post); //update the appreciaition of a user
 
     res.status(200).json({
       message: "ok",
@@ -16,9 +19,10 @@ const updateAppreciation = async (req, res) => {
 };
 
 const createAppreciation = async (req, res) => {
-  const post = req.body;
+  const { userId } = req.body; //appreciation payload
+  console.log("userId::" + userId);
   try {
-    const serviceResponse = await appreciationService.createAppreciation(post);
+    await appreciationService.createAppreciation(userId);
 
     res.status(200).json({
       message: "ok",
@@ -30,9 +34,9 @@ const createAppreciation = async (req, res) => {
   }
 };
 
-// Get a post based on the id
+// Get a appreciaition based on the userid
 const getAppreciation = async (req, res) => {
-  const { userid } = req.params;
+  const { userid } = req.params; //userid
   try {
     const appreciation = await appreciationService.getAppreciation(userid);
 

@@ -1,4 +1,7 @@
-import Offer_appreciation from "../models/offer_appreciation.js";
+/**
+ * @author aman singh bhandari
+ */
+import { Offer_appreciation } from "../models/index.js";
 
 // Service to save the post
 const updateAppreciation = async (appreciation) => {

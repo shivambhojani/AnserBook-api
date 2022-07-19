@@ -1,6 +1,10 @@
+/*
+ * @author: Shivangi Bhatt
+ * @description: Controllers for feeds
+ */
 import { feedService } from "../services/index.js";
 
-// Get all feeds
+// Get all feeds based on filter
 const getFeeds = async (req, res) => {
   try {
     const { filter } = req.params;
@@ -49,6 +53,8 @@ const getFeeds = async (req, res) => {
   }
 };
 
+// Provide reactions to posts
+
 const addReactions = async (req, res) => {
   const { id } = req.params;
   const { reaction, userId, userName } = req.body;
@@ -68,7 +74,27 @@ const addReactions = async (req, res) => {
   }
 };
 
+// Get top 5 star employees
+
+const getStarEmployees = async (req, res) => {
+  try {
+    const starEmployees = await feedService.getStarEmployees();
+
+    res.status(200).json({
+      status: true,
+      message: starEmployees,
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({
+      message: "Internal Server Error",
+      status: false,
+    });
+  }
+};
+
 export const feedsController = {
   getFeeds,
   addReactions,
+  getStarEmployees,
 };
