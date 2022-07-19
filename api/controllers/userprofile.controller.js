@@ -37,6 +37,22 @@ const currentUser = async (req, res) => {
     }
   };
 
+  const getUserbyID = async (req, res) => {
+    let id = req.query.id;
+    try{
+      const user = await userprofileService.getUserbyID(id);
+      console.log(user);
+      res.status(200).json({
+        status: true,
+        user
+      })
+    }catch(err){
+      res.status(500).json({
+        message: "Internal Server Error",
+      });
+    }
+  };
+
   //Update profile details for current user
   const updatecurrentUser = async (req, res) => {
     let email = req.query.email;
@@ -190,7 +206,8 @@ const postsUser = async (req,res) => {
     updatePassword,
     makeactive,
     makeinactive,
-    getImage
+    getImage,
+    getUserbyID
   };
   
   

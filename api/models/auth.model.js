@@ -29,6 +29,11 @@ const UserSchema = new mongoose.Schema({
   pinCode: {
     type: "string",
   },
+  oldPost: [
+    {
+      type: ObjectId,
+    },
+  ],
   profilePicture: {
     type: "string",
   },
