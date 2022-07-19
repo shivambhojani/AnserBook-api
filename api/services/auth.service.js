@@ -186,24 +186,26 @@ const resetPassword = async (req, res) => {
 };
 
 const snsNotify = async (req, res) => {
-  var params = {
-    Message: "You have created a post on AnswerBook.",
-    TopicArn: "arn:aws:sns:us-east-1:309204736680:notifications",
-    Endpoint: req.params.email,
-  };
+  // var params = {
+  //   Message: "You have created a post on AnswerBook.",
+  //   TopicArn: "arn:aws:sns:us-east-1:309204736680:notifications",
+  //   Endpoint: req.params.email,
+  // };
 
-  var publishTextPromise = new AWS.SNS({ apiVersion: "2010-03-31" })
-    .publish(params)
-    .promise();
+  // var publishTextPromise = new AWS.SNS({ apiVersion: "2010-03-31" })
+  //   .publish(params)
+  //   .promise();
 
-  publishTextPromise
-    .then(function (data) {
-      console.log(`Message ${params.Message} sent.`);
-      console.log(`MessageID is` + data.MessageId);
-    })
-    .catch(function (err) {
-      console.error(err, err.message);
-    });
+  // publishTextPromise
+  //   .then(function (data) {
+  //     console.log(`Message ${params.Message} sent.`);
+  //     console.log(`MessageID is` + data.MessageId);
+  //   })
+  //   .catch(function (err) {
+  //     console.error(err, err.message);
+  //   });
+
+  console.log(req.params.email);
 };
 
 export const authService = {
