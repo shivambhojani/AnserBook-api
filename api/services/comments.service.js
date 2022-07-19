@@ -41,8 +41,14 @@ const updateAComment = async (comment) => {
   }
 };
 
+// Service to delete the comment
+const deleteAComment = async (id) => {
+  await Comment.deleteOne({ _id: id });
+};
+
 export const commentsService = {
   insertAComment,
   getAllCommentsOfPost,
   updateAComment,
+  deleteAComment,
 };
