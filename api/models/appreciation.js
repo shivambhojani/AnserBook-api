@@ -11,6 +11,7 @@ const appreciationSchema = new Schema({
   commentsScore: Number,
   bestAnswerScore: Number,
   postsScore: Number,
+  badge: String,
 });
 
 export default mongoose.model("appreciation", appreciationSchema);
