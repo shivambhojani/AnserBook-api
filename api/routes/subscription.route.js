@@ -13,5 +13,9 @@ subscriptionRoute.post(
   "/unSubscribeUser",
   subscriptionController.unSubscribeUser
 );
+subscriptionRoute.get(
+  "/getAllSubscribedUser/:id",
+  subscriptionController.getAllSubscribedUSer
+);
 
 export default subscriptionRoute;
