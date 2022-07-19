@@ -28,10 +28,15 @@ const resetPassword = (req, res) => {
   authService.resetPassword(req, res);
 };
 
+const snsNotify = (req, res) => {
+  authService.snsNotify(req, res);
+};
+
 export const authController = {
   loginUser,
   registerUser,
   forgetPasswordUser,
   requestForgotPassword,
   resetPassword,
+  snsNotify,
 };
