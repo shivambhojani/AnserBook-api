@@ -160,6 +160,23 @@ const getStarEmployees = async () => {
       },
     },
     { $unwind: "$user" },
+    {
+      $lookup: {
+        from: "userimage1",
+        localField: "user.email",
+        foreignField: "email",
+        as: "images",
+      },
+    },
+    { $unwind: { path: "$images", preserveNullAndEmptyArrays: true } },
+    {
+      $match: {
+        $or: [
+          { "images.email": "user.email" },
+          { "images.0": { $exists: false } },
+        ],
+      },
+    },
     { $sort: { totalScore: -1 } },
     { $limit: 5 },
   ]);

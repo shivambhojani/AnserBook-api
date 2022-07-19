@@ -37,8 +37,13 @@ const incrementLikesScore = async (user) => {
   //get the scores offered and add it in the appreciation of the user
   const scores_offered = await Offer_appreciation.find(); //offered score
   const score_offered = scores_offered[0];
-  appreciation.likesScore = appreciation.likesScore + score_offered.likesScore;
-  await Appreciation.updateOne({ userId: appreciation.userId }, appreciation);
+  if (appreciation) {
+    appreciation.likesScore =
+      appreciation.likesScore + score_offered.likesScore;
+    await Appreciation.updateOne({ userId: appreciation.userId }, appreciation);
+  } else {
+    createAppreciation(userid);
+  }
 };
 
 //add appreciation on comment

@@ -52,8 +52,27 @@ const unSubscribeUser = async (req, res) => {
     });
   }
 };
+const getAllSubscribedUSer = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const users = await subscriptionService.getAllSubscribedUSer(id);
+
+    res.status(200).json({
+      message: users,
+      status: true,
+    });
+  } catch (err) {
+    console.log("error", err);
+    res.status(500).json({
+      message: "Internal Server Error",
+      status: false,
+    });
+  }
+};
 
 export const subscriptionController = {
   subscribeUser,
   unSubscribeUser,
+  getAllSubscribedUSer,
 };
