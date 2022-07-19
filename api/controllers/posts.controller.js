@@ -20,6 +20,45 @@ const postsGET = async (req, res) => {
   }
 };
 
+// Get all posts
+const postsTotalGET = async (req, res) => {
+  
+  try {
+    const posts = await postsService.getTotalPosts();
+    console.log(posts);
+
+    res.status(200).json({
+      message: "ok",
+      posts,
+    });
+  } catch (err) {
+    res.status(500).json({
+      message: "Internal Server Error",
+    });
+  }
+};
+
+// Get all posts with tags
+const postsByTagsGET = async (req, res) => {
+  const tags_string = req.params.tags;
+  const tags = tags_string.split(",")
+  console.log("In postsByTagsGET->", tags);
+
+  try {
+    const posts = await postsService.getAllPostsByTags(tags);
+    console.log(posts);
+
+    res.status(200).json({
+      message: "ok",
+      posts,
+    });
+  } catch (err) {
+    res.status(500).json({
+      message: "Internal Server Error",
+    });
+  }
+};
+
 // Get a post based on the id
 const postsByIDGET = async (req, res) => {
   const { id } = req.params;
@@ -102,6 +141,8 @@ const postsByIDPUT = async (req, res) => {
 export const postsController = {
   postsGET,
   postsByIDGET,
+  postsByTagsGET,
+  postsTotalGET,
   postsPOST,
   postsByIDDELETE,
   postsByIDPUT,
