@@ -4,7 +4,26 @@ import User from "../models/auth.model.js";
 import Image from "../models/userimage.model.js";
 
 const getAllUsers = async () => {
-  const users = await User.find();
+  const users = await User.aggregate([
+    {
+      $lookup: {
+        from: "userimage1",
+        localField: "email",
+        foreignField: "email",
+        as: "images",
+      },
+    },
+    { $unwind: { path: "$images", preserveNullAndEmptyArrays: true } },
+    {
+      $match: {
+        $or: [
+          { "images.email": "subscribedUsers.email" },
+          { "images.0": { $exists: false } },
+        ],
+      },
+    },
+  ]);
+  // const users = await User.find();
   return users;
 };
 
@@ -66,49 +85,52 @@ const updatePassword = async (email, oldPassword, newPassword) => {
 };
 
 const uploadImage = async (email, imageb64) => {
-  console.log("Upload Image Service")
+  console.log("Upload Image Service");
   const userImage = await getImage(email);
   if (userImage) {
     const updateImage = Image.updateOne(
       { email: email },
       {
-        $set:
-        {
-          image: imageb64
-        }
-      }).then((response) => {
+        $set: {
+          image: imageb64,
+        },
+      }
+    )
+      .then((response) => {
         console.log("Image uploaded complete");
         return response;
-      }).catch((err) => {
+      })
+      .catch((err) => {
         console.log(err);
         return err;
       });
-  }
-  else {
+  } else {
     const newImage = new Image({
       email: email,
-      image: imageb64
+      image: imageb64,
     });
-    newImage.save().then((res) => {
-      console.log("image is saved");
-    }).catch((err) => {
-      console.log(err, "error has occur");
-    });
+    newImage
+      .save()
+      .then((res) => {
+        console.log("image is saved");
+      })
+      .catch((err) => {
+        console.log(err, "error has occur");
+      });
     return newImage;
   }
 };
 
 const getImage = async (email) => {
-  console.log('Get Image Service')
-  console.log(email)
+  console.log("Get Image Service");
+  console.log(email);
   try {
-    const userImage = await Image.findOne({ email: email })
-    return userImage
-  }
-  catch (error) {
+    const userImage = await Image.findOne({ email: email });
+    return userImage;
+  } catch (error) {
     return error;
-  };
-}
+  }
+};
 
 const makeactive = async (email) => {
   const user = await getcurrentUser(email);
@@ -199,5 +221,5 @@ export const userprofileService = {
   makeinactive,
   uploadImage,
   getImage,
-  getUserbyID
+  getUserbyID,
 };
