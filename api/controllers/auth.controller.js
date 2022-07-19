@@ -20,8 +20,18 @@ const forgetPasswordUser = (req, res) => {
   const fp = authService.fpService(req.body, res);
 };
 
+const requestForgotPassword = (req, res) => {
+  authService.requestForgotPassword(req, res);
+};
+
+const resetPassword = (req, res) => {
+  authService.resetPassword(req, res);
+};
+
 export const authController = {
   loginUser,
   registerUser,
   forgetPasswordUser,
+  requestForgotPassword,
+  resetPassword,
 };
