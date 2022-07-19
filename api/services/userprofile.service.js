@@ -23,6 +23,21 @@ const getcurrentUser = async (email) => {
   }
 };
 
+const getUserbyID = async (id) => {
+  console.log("user service");
+  var user;
+
+  try {
+    user = await User.findOne({ _id: id });
+
+    // user = user.filter((user) => user.email == email)
+
+    return user;
+  } catch (error) {
+    user = await User.find();
+  }
+};
+
 const updatePassword = async (email, oldPassword, newPassword) => {
   console.log("update Password Service");
   const user = await getcurrentUser(email);
@@ -183,5 +198,6 @@ export const userprofileService = {
   makeactive,
   makeinactive,
   uploadImage,
-  getImage
+  getImage,
+  getUserbyID
 };

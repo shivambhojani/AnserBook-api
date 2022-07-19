@@ -27,6 +27,9 @@ userprofileRoute.post("/uploadImage", userprofileController.uploadImage);
 
 userprofileRoute.get("/getprofileImage", userprofileController.getImage);
 
+userprofileRoute.get("/getuserbyid", userprofileController.getUserbyID);
+
+
 // const storage = multer.diskStorage({
 //   destination: (req, file, cb) => {
 //     cb(null, "images");
