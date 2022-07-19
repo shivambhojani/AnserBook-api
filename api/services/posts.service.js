@@ -22,6 +22,22 @@ const getAllPosts = async (id) => {
   return posts;
 };
 
+// Service to get all posts
+const getTotalPosts = async () => {
+  const posts = await Post.find();
+
+  return posts;
+};
+
+// Service to get all posts
+const getAllPostsByTags = async(reqBody) => {
+  console.log(reqBody);
+  const posts = await Post.find({tags: {$in: reqBody}})
+  console.log(posts.length);
+
+  return posts;
+};
+
 // Service to get just one post
 const getAPost = async (id) => {
   const post = await Post.findById(id);
@@ -62,6 +78,8 @@ const updateAPost = async (id, reqBody) => {
 
 export const postsService = {
   getAllPosts,
+  getAllPostsByTags,
+  getTotalPosts,
   getAPost,
   insertAPost,
   deleteAPost,

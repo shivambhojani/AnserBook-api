@@ -23,42 +23,48 @@ userprofileRoute.put("/makeactive", userprofileController.makeactive);
 
 userprofileRoute.put("/makeinactive", userprofileController.makeinactive);
 
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "images");
-  },
-  filename: (req, file, cb) => {
-    cb(null, file.originalname);
-  },
-});
-const upload = multer({ storage: storage });
-userprofileRoute.post(
-  "/uploadImage",
-  upload.single("testImage"),
-  (req, res) => {
-    const saveImage = new Image({
-      email: req.body.email,
-      image: {
-        data: fs.readFileSync("images/" + req.file.filename),
-        contentType: "image/png",
-      },
-    });
-    saveImage
-      .save()
-      .then((res) => {
-        console.log("image is saved");
-      })
-      .catch((err) => {
-        console.log(err, "error has occur");
-      });
-    res.send("image is saved");
-  }
-);
+userprofileRoute.post("/uploadImage", userprofileController.uploadImage);
 
-userprofileRoute.get("/getprofileImage", async (req, res) => {
-  let email = req.query.email;
-  const imageData = await Image.findOne({ email: email });
-  res.json(imageData);
-});
+userprofileRoute.get("/getprofileImage", userprofileController.getImage);
+
+userprofileRoute.get("/getuserbyid", userprofileController.getUserbyID);
+
+
+// const storage = multer.diskStorage({
+//   destination: (req, file, cb) => {
+//     cb(null, "images");
+//   },
+//   filename: (req, file, cb) => {
+//     cb(null, file.originalname);
+//   },
+// });
+// const upload = multer({ storage: storage });
+// userprofileRoute.post(
+//   "/uploadImage",
+//   upload.single("testImage"),
+//   (req, res) => {
+//     const saveImage = new Image({
+//       email: req.body.email,
+//       image: {
+//         data: fs.readFileSync("images/" + req.file.filename),
+//         contentType: "image/png",
+//       },
+//     });
+//     saveImage
+//       .save()
+//       .then((res) => {
+//         console.log("image is saved");
+//       })
+//       .catch((err) => {
+//         console.log(err, "error has occur");
+//       });
+//     res.send("image is saved");
+//   }
+// );
+// userprofileRoute.get("/getprofileImage", async (req, res) => {
+//   let email = req.query.email;
+//   const imageData = await Image.findOne({ email: email });
+//   res.json(imageData);
+// });
 
 export default userprofileRoute;

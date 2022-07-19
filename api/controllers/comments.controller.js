@@ -52,8 +52,25 @@ const putComment = async (req, res) => {
   }
 };
 
+// Delete a comment of a post
+const deleteComment = async (req, res) => {
+  const { _id } = req.params;
+  try {
+    await commentsService.deleteAComment(_id);
+
+    res.status(200).json({
+      message: "ok",
+    });
+  } catch (err) {
+    res.status(500).json({
+      message: "Internal Server Error",
+    });
+  }
+};
+
 export const commentsController = {
   postComment,
   getComments,
   putComment,
+  deleteComment,
 };
