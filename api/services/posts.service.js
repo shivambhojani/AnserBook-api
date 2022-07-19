@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 const ObjectId = mongoose.Types.ObjectId;
 import { appreciationService } from "../services/index.js";
-
+import { userprofileService } from "../services/index.js";
 import { Post } from "../models/index.js";
 
 // Service to get all posts
@@ -30,9 +30,9 @@ const getTotalPosts = async () => {
 };
 
 // Service to get all posts
-const getAllPostsByTags = async(reqBody) => {
+const getAllPostsByTags = async (reqBody) => {
   console.log(reqBody);
-  const posts = await Post.find({tags: {$in: reqBody}})
+  const posts = await Post.find({ tags: { $in: reqBody } });
   console.log(posts.length);
 
   return posts;
@@ -51,6 +51,10 @@ const insertAPost = async (post) => {
 
   await newPost.save();
   const { userId } = post;
+
+  const user = await userprofileService.getUserbyID(userId);
+  console.log("%%%%%%%%%%" + user.email);
+
   appreciationService.incrementPostsScore({ userId });
 };
 
